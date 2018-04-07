@@ -4,17 +4,26 @@ function task1(){
 	allElem[rand].style.background = "#f00";
 };
 
-function task2(){
-	let randColors = Math.floor(Math.random() * (255+1));	
+const allElem = document.querySelectorAll("*");
+let rand;
+let randElem, changed=[], poped;
 
-	let allElem = document.querySelectorAll("*");
-	let rand = Math.floor(Math.random() * allElem.length);
-	allElem[rand].style.backgroundColor = "rgb("+Math.floor(Math.random() * (255+1))+","+Math.floor(Math.random() * (255+1))+","+Math.floor(Math.random() * (255+1))+")";
+function task2(){
+	rand =  Math.floor(Math.random() * allElem.length);
+	randElem = allElem[rand];
+	randElem.style.backgroundColor = "rgb("+Math.floor(Math.random() * (255+1))+","+Math.floor(Math.random() * (255+1))+","+Math.floor(Math.random() * (255+1))+")";
+	changed.push(randElem);
+}
+
+function task3(){
+	poped = changed.shift();
+	poped.style.backgroundColor = "";
 }
 
 
 
 window.onload = function(){
-	setInterval(task2, 2000);
+	let intervalId = setInterval(task2, 1000);	
+	setInterval(task3, 1500);
 };
 
