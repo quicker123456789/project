@@ -381,6 +381,12 @@ html{
 	color: #9fa3a7;
 }
 
+.text_style_manager{
+	font-size: 14px;
+	line-height: 1.86;
+	color: #9fa3a7;
+}
+
 .text_style_xs{
 	color: #c8c8c8;
 	line-height: 1.83;
@@ -881,3 +887,26 @@ html{
 	top: 220px;
 }
 /*----------------------------------------------------------------------------------------------*/
+.tick{
+	display: inline-block;
+	width: 79px;
+	height: 79px;
+	border-radius: 100%;
+	background: #fff url(../icons/shape.svg) no-repeat 50% 50%;
+	border: solid 3px #1e8bc3;
+}
+
+.basic-block__pos{
+	margin: 102px 0 28px;
+}
+
+.basic-block__text{
+	margin: 0 auto;
+	width: 568px;
+}
+
+.basic-block__description{
+	width: 390px;
+	margin: 40px auto;
+	margin-bottom: 80px;
+}
