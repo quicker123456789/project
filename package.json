@@ -1,5 +1,5 @@
 {
-  "name": "lesson_1",
+  "name": "project",
   "version": "1.0.0",
   "description": "first lesson project",
   "main": "index.js",
@@ -11,5 +11,6 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.23.6"
-  }
+  },
+  "dependencies": {}
 }

@@ -892,7 +892,7 @@ html{
 	width: 79px;
 	height: 79px;
 	border-radius: 100%;
-	background: #fff url(../icons/shape.svg) no-repeat 50% 50%;
+	background: #fff url(../assets/icons/shape.svg) no-repeat 50% 50%;
 	border: solid 3px #1e8bc3;
 }
 
