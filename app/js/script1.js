@@ -1,6 +1,9 @@
 const allElem = document.querySelectorAll("*");
-let rand;
-let randElem, changed=[], poped;
+let rand, randElem, changed=[];
+
+function randColor(){
+	return Math.floor(Math.random() * (256));
+}
 
 function task1(){
 	rand =  Math.floor(Math.random() * allElem.length);
@@ -8,27 +11,23 @@ function task1(){
 };
 
 
-function task2(){
+function highlight(){
 	rand =  Math.floor(Math.random() * allElem.length);
 	randElem = allElem[rand];
-	let r = Math.floor(Math.random() * (255+1));
-	let g = Math.floor(Math.random() * (255+1));
-	let b = Math.floor(Math.random() * (255+1));
-
-
-	randElem.style.backgroundColor = "rgb("+ r + "," + g + "," + b + ")";
+	let r = randColor(), g = randColor(), b = randColor();
+	
+	randElem.style.backgroundColor = ["rgb(", r, g, b, ")"].join("+");
 	changed.push(randElem);
 }
 
-function task3(){
-//	poped = changed.shift();
+function reHighlight(){
 	changed.shift().style.backgroundColor = "";
 }
 
 
 
 window.onload = function(){
-	setInterval(task2, 1000);
-	setInterval(task3, 1500);
+	setInterval(highlight, 1000);
+	setInterval(reHighlight, 1500);
 };
 
