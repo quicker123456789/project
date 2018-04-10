@@ -16,7 +16,7 @@ function highlight(){
 	randElem = allElem[rand];
 	let r = randColor(), g = randColor(), b = randColor();
 	
-	randElem.style.backgroundColor = ["rgb(", r, g, b, ")"].join("+");
+	randElem.style.backgroundColor = `rgb(${r},${g},${b})`;
 	changed.push(randElem);
 }
 
