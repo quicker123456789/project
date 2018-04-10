@@ -186,11 +186,11 @@ html{
 }
 
 .section__headline{	
-	margin: 17px 0 0;
+	margin: 17px 0 6px;
 }
 
 .section__date{
-	margin-top: 6px;
+/*	margin-top: 6px; */
 }
 
 .date{
