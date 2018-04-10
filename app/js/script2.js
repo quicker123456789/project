@@ -5,7 +5,6 @@ function createContainer(object) {
 	date = document.createElement("time");
 
 	img.setAttribute("src", object.imgUrl);
-	//img.setAttribute("src",["assets/lesson2/",object.imgUrl,".jpg"].join(''));
 	img.className = "main-block__img";
 	headline.className = "headline section__headline";
 	headline.innerText = object.description;
