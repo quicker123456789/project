@@ -86,7 +86,7 @@ window.onload = () => {
 		}
 	];
 	
-	for (var i = 0; i < 3; i++) {
+	for (var i = 0; i < 3; i++){
 		let block = createContainer(arrayOfObj[randomDigit(12)]);
 		mainBlock.appendChild(block);
 	}
