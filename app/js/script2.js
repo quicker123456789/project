@@ -19,75 +19,76 @@ function createContainer(object) {
 	return container;
 }
 
-let randomDigit = (limit) => Math.floor(Math.random() * limit);
+let randomDigit = (limit) => Math.floor(Math.random() * (limit+1));
 
 window.onload = () => {	
 	let mainBlock = document.querySelector(".main-block__slider"),
-	arrayOfObj = [
-		{
-			imgUrl: "assets/lesson2/1.jpg",
-			description: "пакет №1",
-			datetime: "12-12-12"
-		},
-		{
-			imgUrl: "assets/lesson2/2.jpg",
-			description: "пакет №2",
-			datetime: "12-12-12"
-		},
-		{
-			imgUrl: "assets/lesson2/3.jpg",
-			description: "пакет №3",
-			datetime: "12-12-12"
-		},
-		{
-			imgUrl: "assets/lesson2/4.jpg",
-			description: "пакет №4",
-			datetime: "12-12-12"
-		},
-		{
-			imgUrl: "assets/lesson2/5.jpg",
-			description: "пакет №5",
-			datetime: "12-12-12"
-		},
-		{
-			imgUrl: "assets/lesson2/6.jpg",
-			description: "пакет №6",
-			datetime: "12-12-12"
-		},
-		{
-			imgUrl: "assets/lesson2/7.jpg",
-			description: "пакет №7",
-			datetime: "12-12-12"
-		},
-		{
-			imgUrl: "assets/lesson2/8.jpg",
-			description: "пакет №8",
-			datetime: "12-12-12"
-		},
-		{
-			imgUrl: "assets/lesson2/9.jpg",
-			description: "пакет №9",
-			datetime: "12-12-12"
-		},
-		{
-			imgUrl: "assets/lesson2/10.jpg",
-			description: "пакет №10",
-			datetime: "12-12-12"
-		},
-		{
-			imgUrl: "assets/lesson2/11.jpg",
-			description: "пакет №11",
-			datetime: "12-12-12"
-		},
-		{
-			imgUrl: "assets/lesson2/12.jpg",
-			description: "пакет №12",
-			datetime: "12-12-12"
-		}
-	];
-	
+		arrayOfObj = [
+			{
+				imgUrl: "assets/lesson2/1.jpg",
+				description: "пакет №1",
+				datetime: "12-12-12"
+			},
+			{
+				imgUrl: "assets/lesson2/2.jpg",
+				description: "пакет №2",
+				datetime: "12-12-12"
+			},
+			{
+				imgUrl: "assets/lesson2/3.jpg",
+				description: "пакет №3",
+				datetime: "12-12-12"
+			},
+			{
+				imgUrl: "assets/lesson2/4.jpg",
+				description: "пакет №4",
+				datetime: "12-12-12"
+			},
+			{
+				imgUrl: "assets/lesson2/5.jpg",
+				description: "пакет №5",
+				datetime: "12-12-12"
+			},
+			{
+				imgUrl: "assets/lesson2/6.jpg",
+				description: "пакет №6",
+				datetime: "12-12-12"
+			},
+			{
+				imgUrl: "assets/lesson2/7.jpg",
+				description: "пакет №7",
+				datetime: "12-12-12"
+			},
+			{
+				imgUrl: "assets/lesson2/8.jpg",
+				description: "пакет №8",
+				datetime: "12-12-12"
+			},
+			{
+				imgUrl: "assets/lesson2/9.jpg",
+				description: "пакет №9",
+				datetime: "12-12-12"
+			},
+			{
+				imgUrl: "assets/lesson2/10.jpg",
+				description: "пакет №10",
+				datetime: "12-12-12"
+			},
+			{
+				imgUrl: "assets/lesson2/11.jpg",
+				description: "пакет №11",
+				datetime: "12-12-12"
+			},
+			{
+				imgUrl: "assets/lesson2/12.jpg",
+				description: "пакет №12",
+				datetime: "12-12-12"
+			}
+		],
+		len = arrayOfObj.length;	
+		
 	for (var i = 0; i < 3; i++){
-		let block = createContainer(arrayOfObj[randomDigit(12)]);
+		let block = createContainer(arrayOfObj[randomDigit(len)]);
 		mainBlock.appendChild(block);
 	}
 };

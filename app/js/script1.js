@@ -6,13 +6,13 @@ function randColor(){
 }
 
 function task1(){
-	rand =  Math.floor(Math.random() * allElem.length);
+	rand = Math.floor(Math.random() * allElem.length);
 	allElem[rand].style.background = "#f00";
 };
 
 
 function highlight(){
-	rand =  Math.floor(Math.random() * allElem.length);
+	rand = Math.floor(Math.random() * allElem.length);
 	randElem = allElem[rand];
 	let r = randColor(), g = randColor(), b = randColor();
 
@@ -27,6 +27,7 @@ function reHighlight(){
 
 
 window.onload = function(){
+	//task1();
 	setInterval(highlight, 1000);
 	setInterval(reHighlight, 1500);
 };
