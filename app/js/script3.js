@@ -1,4 +1,5 @@
-let slider = document.querySelector(".main-block__slider"),		
+let slider = document.querySelector(".main-block__slider"),	
+	circlesList = document.querySelector(".carousel__circles"),
 	arrayOfObj = [
 		{
 			imgUrl: "assets/lesson2/1.jpg",
@@ -87,16 +88,41 @@ function createContainer(object) {
 	return container;
 }
 
+function createCircle(){
+	let circle = document.createElement("li");
+	circle.className = "carousel__dot";
+
+	return circle;
+}
+
 window.onload = () => {
-	arrayOfObj.forEach(obj => slider.appendChild(createContainer(obj)));		
+	arrayOfObj.forEach(obj => {
+		slider.appendChild(createContainer(obj));		
+	});
+
+	[].forEach.call(slider.children, (child, i) => {
+		let dot = createCircle();
+		dot.setAttribute("data-ind", i);
+		circlesList.appendChild(dot);
+	});
 };
 
 document.querySelector(".arrow__left").onclick = () => {
-	position = Math.min(position + width, 0)
+	position = Math.min(position + width, 0);
     slider.style.marginLeft = position + 'px';
 };
 
 document.querySelector(".arrow__right").onclick = () => {	
 	position = Math.max(position - width, -width * (len));	
+    slider.style.marginLeft = position + 'px';
+};
+
+circlesList.onclick = (event) => {	
+	let target = event.target, 
+		num = target.dataset.ind;
+
+	if(target.tagName !== "LI") return;
+	
+	position = -width*(num-1);	
     slider.style.marginLeft = position + 'px';
 };
