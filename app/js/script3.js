@@ -64,7 +64,8 @@ let slider = document.querySelector(".main-block__slider"),
 	],
 	len = arrayOfObj.length,
 	position = 0,
-	width = 360;	
+	width = 360,
+	lighted;	
 
 
 function createContainer(object) {
@@ -95,6 +96,17 @@ function createCircle(){
 	return circle;
 }
 
+function delLight(marker){	
+	marker = circlesList.querySelector(".carousel__dot_highlight");		
+	marker.classList.remove("carousel__dot_highlight");	
+
+	return marker;
+}
+
+function highLight(l){
+	l.classList.add("carousel__dot_highlight");
+}
+
 window.onload = () => {
 	arrayOfObj.forEach(obj => {
 		slider.appendChild(createContainer(obj));		
@@ -105,24 +117,45 @@ window.onload = () => {
 		dot.setAttribute("data-ind", i);
 		circlesList.appendChild(dot);
 	});
+
+	lighted = circlesList.children[1];
+	lighted.classList.add("carousel__dot_highlight");	
 };
+
 
 document.querySelector(".arrow__left").onclick = () => {
 	position = Math.min(position + width, 0);
     slider.style.marginLeft = position + 'px';
+    
+	lighted = delLight(lighted);
+	if (lighted == circlesList.children[1]) {
+		highLight(lighted);
+		return;
+	}
+	highLight(lighted.previousElementSibling);
 };
 
 document.querySelector(".arrow__right").onclick = () => {	
-	position = Math.max(position - width, -width * (len));	
+	position = Math.max(position - width, -width * len);	
     slider.style.marginLeft = position + 'px';
+
+  	lighted = delLight(lighted);
+  	if (lighted == circlesList.children[13]) {
+		highLight(lighted);
+		return;
+	}
+	highLight(lighted.nextElementSibling);
 };
 
-circlesList.onclick = (event) => {	
+
+circlesList.onclick = (event) => {
 	let target = event.target, 
 		num = target.dataset.ind;
+	if(target.tagName !== "LI") return;	
 
-	if(target.tagName !== "LI") return;
-	
 	position = -width*(num-1);	
     slider.style.marginLeft = position + 'px';
+
+    delLight(lighted);	
+	highLight(target);
 };

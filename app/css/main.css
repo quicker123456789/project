@@ -200,7 +200,7 @@ html{
 }
 
 .section{
-	min-width: 300px;	
+	min-width: 300px;
 }
 
 .section__headline{	
@@ -232,8 +232,7 @@ html{
   outline: none;
 }
 
-.arrow__right{
-	
+.arrow__right{	
 	right: 10px;	
 }
 
@@ -259,6 +258,10 @@ html{
 
 .carousel__dot:active{
 	background-color: #d4e9f4;
+}
+
+.carousel__dot_highlight{
+	background-color: #d4e9f4;	
 }
 /*----------------------------------------------------------------------------------------------*/
 .main-block__thread{
