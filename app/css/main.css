@@ -102,6 +102,7 @@ html{
 	display: inline-block;
 	min-width: 1180px;
 	margin: 50px 210px;
+	position: relative;
 }
 
 .page-wrapper__left-block{	
@@ -170,22 +171,36 @@ html{
 	margin-top: 50px;
 }
 
+.main-block__carousel{
+	position: relative;
+	width: 1100px;
+	overflow: hidden;	
+
+	margin: 26px 60px 0;	
+}
+
 .main-block__slider{	
 	text-align: left;
-	margin: 26px 50px 0;
+//	margin: 26px 50px 0;
+//	margin-right: 0;
+
+	white-space: nowrap;
+	width: 9999px;
+	transition: margin-left 500ms;
 }
 
 .main-block__img{
-	cursor: pointer;
+	cursor: pointer;	
 }
 
 .main-block__section{		
-	float: left;
+//	float: left;
+	display: inline-block;
 	margin: 0 15px;
 }
 
 .section{
-	min-width: 30%;
+	min-width: 300px;	
 }
 
 .section__headline{	
@@ -200,6 +215,35 @@ html{
 	color: #adafb2;
 }
 
+.arrow{	
+	cursor: pointer;	
+	border-radius: 50%;
+	border-style: solid;
+	display: block;
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top: 200px;
+}
+
+.arrow:focus{
+  outline: none;
+}
+
+.arrow__right{
+	background: url(../assets/icons/expand.svg) no-repeat 65% 50%;
+	background-size: 50%;
+	right: 5px;
+	z-index: 2;
+}
+
+.arrow__left{
+	background: url(../assets/icons/expand.svg) no-repeat 65% 50%;
+	transform: scale(-1, 1);
+	background-size: 50%;
+	left: 5px;
+}
+/*----------------------------------------------------------------------------------------------*/
 .main-block__thread{
 	margin: 63px;	
 	text-align: left;
