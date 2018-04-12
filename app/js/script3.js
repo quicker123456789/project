@@ -119,7 +119,7 @@ window.onload = () => {
 	});
 
 	lighted = circlesList.children[1];
-	lighted.classList.add("carousel__dot_highlight");	
+	highLight(lighted);	
 };
 
 
@@ -128,8 +128,9 @@ document.querySelector(".arrow__left").onclick = () => {
     slider.style.marginLeft = position + 'px';
     
 	lighted = delLight(lighted);
-	if (lighted == circlesList.children[1]) {
-		highLight(lighted);
+	if (lighted == circlesList.children[1] || 
+		lighted == circlesList.children[0]) {
+		highLight(circlesList.children[1]);
 		return;
 	}
 	highLight(lighted.previousElementSibling);
@@ -140,8 +141,9 @@ document.querySelector(".arrow__right").onclick = () => {
     slider.style.marginLeft = position + 'px';
 
   	lighted = delLight(lighted);
-  	if (lighted == circlesList.children[13]) {
-		highLight(lighted);
+  	if (lighted == circlesList.children[13] ||
+  		lighted == circlesList.children[14]) {
+		highLight(circlesList.children[13]);
 		return;
 	}
 	highLight(lighted.nextElementSibling);
