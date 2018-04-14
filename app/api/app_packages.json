@@ -1,0 +1,76 @@
+{
+	"array":[
+		{
+			"id": 1,
+			"guid": 123,
+			"description": "стандартный пакет",
+			"datetime": 1489195793649
+		},
+		{
+			"id": 2,
+			"guid": 122,
+			"description": "стандартный пакет",
+			"datetime": 1489195793649
+		},
+		{
+			"id": 3,
+			"guid": 124,
+			"description": "стандартный пакет",
+			"datetime": 1489195793649
+		},
+		{
+			"id": 4,
+			"guid": 125,
+			"description": "пакет №4",
+			"datetime": 1489195793649
+		},
+		{
+			"id": 5,
+			"guid": 126,
+			"description": "пакет №5",
+			"datetime": 1489195793649
+		},
+		{
+			"id": 6,
+			"guid": 127,
+			"description": "пакет №6",
+			"datetime": 1489195793649
+		},
+		{
+			"id": 7,
+			"guid": 128,
+			"description": "пакет №7",
+			"datetime": 1489195793649
+		},
+		{
+			"id": 8,
+			"guid": 111,
+			"description": "пакет №8",
+			"datetime": 1489195793649
+		},
+		{
+			"id": 9,
+			"guid": 112,
+			"description": "пакет №9",
+			"datetime": 1489195793649
+		},
+		{
+			"id": 10,
+			"guid": 110,
+			"description": "пакет №10",
+			"datetime": 1489195793649
+		},
+		{
+			"id": 11,
+			"guid": 109,
+			"description": "пакет №11",
+			"datetime": 1489195793649
+		},
+		{
+			"id": 12,
+			"guid": 100,
+			"description": "пакет №12",
+			"datetime": 1489195793649
+		}
+	]
+}

@@ -76,6 +76,7 @@ html{
 
 .a-link{
   text-decoration: none;  
+  cursor: pointer;
 }
 
 .a-link_style_light{
@@ -173,10 +174,11 @@ html{
 
 .main-block__carousel{
 	position: relative;
-	width: 1100px;
+	width: 1050px;
 	overflow: hidden;	
 
-	margin: 26px 60px 0;		
+	margin: 26px 60px 0;
+	margin-left: 80px;
 }
 
 .main-block__slider{	

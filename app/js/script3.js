@@ -1,20 +1,22 @@
+const WIDTH = 358;
 let slider = document.querySelector(".main-block__slider"),	
-	circlesList = document.querySelector(".carousel__circles"),
+	carousel = document.querySelector(".carousel"),
+//	circlesList = document.querySelector(".carousel__circles"),
 	arrayOfObj = [
 		{
-			imgUrl: "assets/lesson2/1.jpg",
-			description: "пакет №1",
-			datetime: "12-12-12"
+			imgUrl: "assets/images/shot-1.png",
+			description: "стандартный пакет",
+			datetime: "08 апреля 2012"
 		},
 		{
-			imgUrl: "assets/lesson2/2.jpg",
-			description: "пакет №2",
-			datetime: "12-12-12"
+			imgUrl: "assets/images/shot-2.png",
+			description: "стандартный пакет",
+			datetime: "08 апреля 2012"
 		},
 		{
-			imgUrl: "assets/lesson2/3.jpg",
-			description: "пакет №3",
-			datetime: "12-12-12"
+			imgUrl: "assets/images/shot-3.png",
+			description: "стандартный пакет",
+			datetime: "08 апреля 2012"
 		},
 		{
 			imgUrl: "assets/lesson2/4.jpg",
@@ -62,9 +64,9 @@ let slider = document.querySelector(".main-block__slider"),
 			datetime: "12-12-12"
 		}
 	],
+	circlesList,
 	len = arrayOfObj.length,
-	position = 0,
-	width = 360,
+	position = 0,	
 	lighted;	
 
 
@@ -96,6 +98,22 @@ function createCircle(){
 	return circle;
 }
 
+function createCirclesList(){
+	let list = document.createElement("ul");
+	list.className = "list carousel__circles clearfix";
+
+	Array.from(slider.children).forEach((child, i) =>{
+	//	let dot = createCircle();
+		let dot = document.createElement("li");
+		dot.className = "carousel__dot";
+
+		dot.setAttribute("data-ind", i);
+		list.appendChild(dot);
+	});
+
+	return list;
+}
+
 function delLight(marker){	
 	marker = circlesList.querySelector(".carousel__dot_highlight");		
 	marker.classList.remove("carousel__dot_highlight");	
@@ -103,33 +121,17 @@ function delLight(marker){
 	return marker;
 }
 
-function highLight(l){
-	l.classList.add("carousel__dot_highlight");
+function highLight(marker){
+	marker.classList.add("carousel__dot_highlight");
 }
 
-window.onload = () => {
-	arrayOfObj.forEach(obj => {
-		slider.appendChild(createContainer(obj));		
-	});
-
-	[].forEach.call(slider.children, (child, i) => {
-		let dot = createCircle();
-		dot.setAttribute("data-ind", i);
-		circlesList.appendChild(dot);
-	});
-
-	lighted = circlesList.children[1];
-	highLight(lighted);	
-};
-
-
 document.querySelector(".arrow__left").onclick = () => {
-	position = Math.min(position + width, 0);
+	position = Math.min(position + WIDTH, 0);
     slider.style.marginLeft = position + 'px';
     
 	lighted = delLight(lighted);
 	if (lighted == circlesList.children[1] || 
-		lighted == circlesList.children[0]) {
+		lighted == circlesList.firstElementChild) {
 		highLight(circlesList.children[1]);
 		return;
 	}
@@ -137,27 +139,47 @@ document.querySelector(".arrow__left").onclick = () => {
 };
 
 document.querySelector(".arrow__right").onclick = () => {	
-	position = Math.max(position - width, -width * len);	
+	position = Math.max(position - WIDTH, -WIDTH * (len-3));	
     slider.style.marginLeft = position + 'px';
 
   	lighted = delLight(lighted);
-  	if (lighted == circlesList.children[13] ||
-  		lighted == circlesList.children[14]) {
-		highLight(circlesList.children[13]);
+  	if (lighted == circlesList.lastElementChild.previousElementSibling ||
+  		lighted == circlesList.lastElementChild) {
+		highLight(circlesList.lastElementChild.previousElementSibling);
 		return;
 	}
 	highLight(lighted.nextElementSibling);
 };
 
 
-circlesList.onclick = (event) => {
+document.querySelector(".carousel").onclick = (event) => {
 	let target = event.target, 
 		num = target.dataset.ind;
 	if(target.tagName !== "LI") return;	
 
-	position = -width*(num-1);	
+	position = -WIDTH*(num-1);	
     slider.style.marginLeft = position + 'px';
 
     delLight(lighted);	
 	highLight(target);
 };
+
+function init(){
+	arrayOfObj.forEach(obj => {
+		slider.appendChild(createContainer(obj));		
+	});
+	
+	circlesList = createCirclesList();
+
+	carousel.appendChild(circlesList);
+	/*[].forEach.call(slider.children, (child, i) => {
+		let dot = createCircle();
+		dot.setAttribute("data-ind", i);
+		circlesList.appendChild(dot);
+	});*/
+
+	lighted = circlesList.children[1];
+	highLight(lighted);	
+}
+
+window.onload = () => init(); /*addEventListener("load", init);// */
