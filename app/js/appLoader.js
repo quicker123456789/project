@@ -1,4 +1,5 @@
 let xhr = new XMLHttpRequest(),
+	container = document.querySelector(".page-wrapper__right-block"),
 	guidMap = {
 		899: "../assets/images/shot.png"
 	};
@@ -8,14 +9,14 @@ xhr.onload = function() {
 	let obj = JSON.parse(this.responseText);
 	catalogInit(obj);
 
-	document.querySelector(".list_style_catalog").addEventListener("click", appLoad, true);
+	document.querySelector(".list_style_catalog").addEventListener("click", appLoad, true);	
 };
 
 function catalogInit(object){
 	let tmpl = document.querySelector(".tmpl"),
 		list = document.createElement("ul"),
 		tmplInner,
-		pcgLink;
+		pkgLink;
 
 	list.className = "list_style_catalog";
 
@@ -27,7 +28,7 @@ function catalogInit(object){
 		list.appendChild(tmplInner);
 	}
 
-	document.querySelector(".catalog").appendChild(list);
+	document.querySelector(".catalog").appendChild(list);	
 }
 
 function appLoad(event){
@@ -41,8 +42,9 @@ function appLoad(event){
 	xhrApp.open('GET', target.href, true);
 	xhrApp.send();
 	xhrApp.onload = () =>{
-		console.log(xhrApp.status);		
-		blockBuilder(JSON.parse(xhrApp.responseText));
+		console.log(xhrApp.status);	
+		container.innerHTML = "";
+		blockBuilder(container, JSON.parse(xhrApp.responseText));
 	};
 }
 
@@ -52,8 +54,30 @@ function highLight(elem){
 	elem.classList.add("a-link_style_active");
 }
 
-function blockBuilder(object){
-	let container = document.querySelector("page-wrapper__right-block");
+function blockBuilder(parent, object){
+	let	currentElem;
 
-	container.appendChild(object);
+	for (let node in object){
+		switch(node){
+			case "tag": currentElem = document.createElement(object[node]);			
+			break;
+			case "class": currentElem.className = object[node];
+			break;			
+			case "children": object[node].forEach(nodeElem=> blockBuilder(currentElem, nodeElem));
+			break;
+			case "html": currentElem.innerText = object[node];
+			break;
+			case "guid": currentElem.src = guidMap[object[node]];
+			break;
+			case "ms": currentElem.innerText = new Date(object[node]).toLocaleDateString('ru-RU',{year: 'numeric', month: 'long', day: 'numeric' });
+			break;
+			default: currentElem.setAttribute(node, object[node]);
+			break;
+
+		}
+	}
+	parent.appendChild(currentElem);
 }
+
+// N-ое приложение при загрузке
+window.onload = () => document.querySelectorAll(".a-link_style_catalog")[1].click();

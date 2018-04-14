@@ -19,7 +19,7 @@
     	{
     		"tag":"time",
     		"class":"date section__date",
-    		"html":1489195793649
+    		"ms":1489195793649
     	},
 	    {
 	    	"tag":"img",
@@ -39,13 +39,18 @@
 	            },
         		{
         			"tag":"div",
-        			"class":"text_style_app application__position",
+        			"class":"text_style_app application__position",              
         			"children":[
            				{
            					"tag":"span",
            					"class":"text_style_b",
            					"html":"Требования:"
-           				}
+           				},
+                  {
+                    "tag":"span",
+                    "class":"",
+                    "html":" совместимо с v.14.1, ТЯ v.7.4.0.0 и выше, при наличии лицензии на Проигрыватель форм в web"
+                  }
           			]
         		}
       		]
