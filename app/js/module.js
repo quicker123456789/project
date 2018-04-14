@@ -5,15 +5,15 @@ let slider = document.querySelector(".main-block__slider"),
 		123: "assets/images/shot-1.png",
 		122: "assets/images/shot-2.png",
 		124: "assets/images/shot-3.png",
-		125: "assets/lesson2/4.jpg",
-		126: "assets/lesson2/5.jpg",
-		127: "assets/lesson2/6.jpg",
-		128: "assets/lesson2/7.jpg",
-		111: "assets/lesson2/8.jpg",
-		112: "assets/lesson2/9.jpg",
-		110: "assets/lesson2/10.jpg",
-		109: "assets/lesson2/11.jpg",
-		100: "assets/lesson2/12.jpg"
+		125: "assets/images/4.jpg",
+		126: "assets/images/5.jpg",
+		127: "assets/images/6.jpg",
+		128: "assets/images/7.jpg",
+		111: "assets/images/8.jpg",
+		112: "assets/images/9.jpg",
+		110: "assets/images/10.jpg",
+		109: "assets/images/11.jpg",
+		100: "assets/images/12.jpg"
 	},
 	circlesList,
 	position = 0,	
@@ -29,27 +29,26 @@ xhr.onload = function() {
 	document.querySelector(".arrow__left").onclick = () => {
 		position = Math.min(position + WIDTH, 0);
 	    slider.style.marginLeft = position + 'px';
-	    
-		lighted = delLight(lighted);
+	    		
 		if (lighted == circlesList.children[1] || 
 			lighted == circlesList.firstElementChild) {
 			highLight(circlesList.children[1]);
 			return;
 		}
-		highLight(lighted.previousElementSibling);
-		};
+		lighted = highLight(lighted.previousElementSibling);
+	};
 
 	document.querySelector(".arrow__right").onclick = () => {	
 		position = Math.max(position - WIDTH, -WIDTH * (arrayOfObj.length-3));	
 	    slider.style.marginLeft = position + 'px';
-
-	  	lighted = delLight(lighted);
+	  	
 	  	if (lighted == circlesList.lastElementChild.previousElementSibling ||
 	  		lighted == circlesList.lastElementChild) {
 			highLight(circlesList.lastElementChild.previousElementSibling);
 			return;
 		}
-		highLight(lighted.nextElementSibling);
+		lighted = highLight(lighted.nextElementSibling);
+
 	};
 
 
@@ -60,12 +59,15 @@ xhr.onload = function() {
 
 		position = -WIDTH*(num-1);	
 	    slider.style.marginLeft = position + 'px';
-
-	    delLight(lighted);	
+	    
 		highLight(target);
 	};
 
-}
+};
+xhr.onerror = function(){
+	console.log(xhr.status);
+	console.log(xhr.statusText);
+};
 
 /*export*/ function createContainer(object) {
 	let container = document.createElement("div"),
@@ -110,15 +112,13 @@ xhr.onload = function() {
 	return list;
 }
 
-/*export*/ function delLight(marker){	
-	marker = circlesList.querySelector(".carousel__dot_highlight");		
-	marker.classList.remove("carousel__dot_highlight");	
+/*export*/ function highLight(marker){
+	let marked = circlesList.querySelector(".carousel__dot_highlight");		
+	if (marked) marked.classList.remove("carousel__dot_highlight");	
+
+	marker.classList.add("carousel__dot_highlight");
 
 	return marker;
-}
-
-/*export*/ function highLight(marker){
-	marker.classList.add("carousel__dot_highlight");
 }
 
 
@@ -129,9 +129,8 @@ xhr.onload = function() {
 	
 	circlesList = createCirclesList();
 	carousel.appendChild(circlesList);
-	
-	lighted = circlesList.children[1];
-	highLight(lighted);	
+
+	lighted = highLight(circlesList.children[1]);	
 }
 
 //window.onload = () => init(); /*addEventListener("load", init);// */

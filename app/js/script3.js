@@ -19,47 +19,47 @@ let slider = document.querySelector(".main-block__slider"),
 			datetime: "08 апреля 2012"
 		},
 		{
-			imgUrl: "assets/lesson2/4.jpg",
+			imgUrl: "assets/images/4.jpg",
 			description: "пакет №4",
 			datetime: "12-12-12"
 		},
 		{
-			imgUrl: "assets/lesson2/5.jpg",
+			imgUrl: "assets/images/5.jpg",
 			description: "пакет №5",
 			datetime: "12-12-12"
 		},
 		{
-			imgUrl: "assets/lesson2/6.jpg",
+			imgUrl: "assets/images/6.jpg",
 			description: "пакет №6",
 			datetime: "12-12-12"
 		},
 		{
-			imgUrl: "assets/lesson2/7.jpg",
+			imgUrl: "assets/images/7.jpg",
 			description: "пакет №7",
 			datetime: "12-12-12"
 		},
 		{
-			imgUrl: "assets/lesson2/8.jpg",
+			imgUrl: "assets/images/8.jpg",
 			description: "пакет №8",
 			datetime: "12-12-12"
 		},
 		{
-			imgUrl: "assets/lesson2/9.jpg",
+			imgUrl: "assets/images/9.jpg",
 			description: "пакет №9",
 			datetime: "12-12-12"
 		},
 		{
-			imgUrl: "assets/lesson2/10.jpg",
+			imgUrl: "assets/images/10.jpg",
 			description: "пакет №10",
 			datetime: "12-12-12"
 		},
 		{
-			imgUrl: "assets/lesson2/11.jpg",
+			imgUrl: "assets/images/11.jpg",
 			description: "пакет №11",
 			datetime: "12-12-12"
 		},
 		{
-			imgUrl: "assets/lesson2/12.jpg",
+			imgUrl: "assets/images/12.jpg",
 			description: "пакет №12",
 			datetime: "12-12-12"
 		}
