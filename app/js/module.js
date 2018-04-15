@@ -48,7 +48,6 @@ xhr.onload = function() {
 			return;
 		}
 		lighted = highLight(lighted.nextElementSibling);
-
 	};
 
 
@@ -60,7 +59,7 @@ xhr.onload = function() {
 		position = -WIDTH*(num-1);	
 	    slider.style.marginLeft = position + 'px';
 	    
-		highLight(target);
+		lighted = highLight(target);
 	};
 
 };

@@ -1,7 +1,8 @@
 let xhr = new XMLHttpRequest(),
 	container = document.querySelector(".page-wrapper__right-block"),
 	guidMap = {
-		899: "../assets/images/shot.png"
+		899: "../assets/images/shot.png",
+		1234: "../assets/images/shot-2_2.png"
 	};
 xhr.open('GET', '../api/catalog_package.json', true);
 xhr.send();
@@ -63,7 +64,7 @@ function blockBuilder(parent, object){
 			break;
 			case "class": currentElem.className = object[node];
 			break;			
-			case "children": object[node].forEach(nodeElem=> blockBuilder(currentElem, nodeElem));
+			case "children": object[node].forEach(nodeElem => blockBuilder(currentElem, nodeElem));
 			break;
 			case "html": currentElem.innerText = object[node];
 			break;
@@ -71,9 +72,9 @@ function blockBuilder(parent, object){
 			break;
 			case "ms": currentElem.innerText = new Date(object[node]).toLocaleDateString('ru-RU',{year: 'numeric', month: 'long', day: 'numeric' });
 			break;
+
 			default: currentElem.setAttribute(node, object[node]);
 			break;
-
 		}
 	}
 	parent.appendChild(currentElem);

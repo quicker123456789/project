@@ -381,6 +381,7 @@ html{
 
 .application__headline{
 	margin: 46px 0 22px 41px;	
+	text-align: left;
 }
 
 .application__button{
