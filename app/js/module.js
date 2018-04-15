@@ -17,8 +17,9 @@ let slider = document.querySelector(".main-block__slider"),
 	},
 	circlesList,
 	position = 0,	
-	lighted;
-let xhr = new XMLHttpRequest(), arrayOfObj;
+	lighted,
+	xhr = new XMLHttpRequest(), arrayOfObj;
+
 xhr.open('GET', 'api/app_packages.json', true);
 xhr.send();
 xhr.onload = function() {
@@ -26,30 +27,8 @@ xhr.onload = function() {
 	
 	init(arrayOfObj);
 
-	document.querySelector(".arrow__left").onclick = () => {
-		position = Math.min(position + WIDTH, 0);
-	    slider.style.marginLeft = position + 'px';
-	    		
-		if (lighted == circlesList.children[1] || 
-			lighted == circlesList.firstElementChild) {
-			highLight(circlesList.children[1]);
-			return;
-		}
-		lighted = highLight(lighted.previousElementSibling);
-	};
-
-	document.querySelector(".arrow__right").onclick = () => {	
-		position = Math.max(position - WIDTH, -WIDTH * (arrayOfObj.length-3));	
-	    slider.style.marginLeft = position + 'px';
-	  	
-	  	if (lighted == circlesList.lastElementChild.previousElementSibling ||
-	  		lighted == circlesList.lastElementChild) {
-			highLight(circlesList.lastElementChild.previousElementSibling);
-			return;
-		}
-		lighted = highLight(lighted.nextElementSibling);
-	};
-
+	document.querySelector(".arrow__left").onclick = move;
+	document.querySelector(".arrow__right").onclick = move;
 
 	document.querySelector(".carousel").onclick = (event) => {
 		let target = event.target, 
@@ -61,12 +40,32 @@ xhr.onload = function() {
 	    
 		lighted = highLight(target);
 	};
-
 };
 xhr.onerror = function(){
 	console.log(xhr.status);
 	console.log(xhr.statusText);
 };
+
+function move(event){ 
+	if (event.currentTarget.classList.contains("arrow__right")){
+		position = Math.max(position - WIDTH, -WIDTH * (arrayOfObj.length-3));
+
+		(lighted == circlesList.lastElementChild.previousElementSibling ||
+	  		lighted == circlesList.lastElementChild) ? 
+		highLight(circlesList.lastElementChild.previousElementSibling) :
+		lighted = highLight(lighted.nextElementSibling);
+
+	} else {
+		position = Math.min(position + WIDTH, 0);
+
+		(lighted == circlesList.children[1] || 
+			lighted == circlesList.firstElementChild) ?
+		highLight(circlesList.children[1]) :
+		lighted = highLight(lighted.previousElementSibling);
+	}
+	
+	slider.style.marginLeft = position + 'px';
+}
 
 /*export*/ function createContainer(object) {
 	let container = document.createElement("div"),
