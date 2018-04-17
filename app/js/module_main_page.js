@@ -1,36 +1,19 @@
-const WIDTH = 358;
-let slider = document.querySelector(".main-block__slider"),	
-	carousel = document.querySelector(".carousel"),	
-	imgMap = {
-		123: "assets/images/shot-1.png",
-		122: "assets/images/shot-2.png",
-		124: "assets/images/shot-3.png",
-		125: "assets/images/4.jpg",
-		126: "assets/images/5.jpg",
-		127: "assets/images/6.jpg",
-		128: "assets/images/7.jpg",
-		111: "assets/images/8.jpg",
-		112: "assets/images/9.jpg",
-		110: "assets/images/10.jpg",
-		109: "assets/images/11.jpg",
-		100: "assets/images/12.jpg"
-	},
-	circlesList,
+const WIDTH = 360;
+let slider = document.querySelector(".main-block__slider"),			
+	circlesList = document.querySelector('.carousel__circles'),
 	position = 0,	
 	lighted,
-	xhr = new XMLHttpRequest(), arrayOfObj;
+	xhr = new XMLHttpRequest();
 
 xhr.open('GET', 'api/app_packages.json', true);
 xhr.send();
-xhr.onload = function() {
-	arrayOfObj = JSON.parse(this.responseText)["array"];	
-	
-	init(arrayOfObj);
+xhr.onload = function() {	
+	init(JSON.parse(this.responseText));
 
 	document.querySelector(".arrow__left").onclick = move;
 	document.querySelector(".arrow__right").onclick = move;
 
-	document.querySelector(".carousel").onclick = (event) => {
+	circlesList.onclick = (event) => {
 		let target = event.target, 
 			num = target.dataset.ind;
 		if(target.tagName !== "LI") return;	
@@ -48,7 +31,7 @@ xhr.onerror = function(){
 
 function move(event){ 
 	if (event.currentTarget.classList.contains("arrow__right")){
-		position = Math.max(position - WIDTH, -WIDTH * (arrayOfObj.length-3));
+		position = Math.max(position - WIDTH, -WIDTH * (slider.children.length-3));
 
 		(lighted == circlesList.lastElementChild.previousElementSibling ||
 	  		lighted == circlesList.lastElementChild) ? 
@@ -71,12 +54,32 @@ function move(event){
 	let container = document.createElement("div"),
 	img = document.createElement("img"),
 	headline = document.createElement("div"),
-	date = document.createElement("time");
+	link = document.createElement("a"),
+	date = document.createElement("time"),
+	imgMap = {
+		123: "assets/images/shot-1.png",
+		122: "assets/images/shot-2.png",
+		124: "assets/images/shot-3.png",
+		125: "assets/images/4.jpg",
+		126: "assets/images/5.jpg",
+		127: "assets/images/6.jpg",
+		128: "assets/images/7.jpg",
+		111: "assets/images/8.jpg",
+		112: "assets/images/9.jpg",
+		110: "assets/images/10.jpg",
+		109: "assets/images/11.jpg",
+		100: "assets/images/12.jpg",
+		301: "assets/images/1.jpg",
+		302: "assets/images/2.jpg"
+	};
 
 	img.setAttribute("src", imgMap[object.guid]);
-	img.className = "main-block__img";
+	img.className = "main-block__img";	
+	link.className = "a-link headline";
+	link.innerText = object.title;
+	link.href = `catalog/main catalog.html?id=${object.id}`;
 	headline.className = "headline section__headline";
-	headline.innerText = object.description;
+	headline.appendChild(link);
 	date.className = "date section__date";
 	date.innerText = new Date(object.datetime).toLocaleDateString('ru-RU',{year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -88,26 +91,14 @@ function move(event){
 	return container;
 }
 
-/*export*/ function createCircle(){
-	let circle = document.createElement("li");
-	circle.className = "carousel__dot";
-
-	return circle;
-}
-
 /*export*/ function createCirclesList(){
-	let list = document.createElement("ul");
-	list.className = "list carousel__circles clearfix";
-
 	Array.from(slider.children).forEach((child, i) =>{
 		let dot = document.createElement("li");
 		dot.className = "carousel__dot";
 
 		dot.setAttribute("data-ind", i);
-		list.appendChild(dot);
-	});
-
-	return list;
+		circlesList.appendChild(dot);
+	});	
 }
 
 /*export*/ function highLight(marker){
@@ -124,10 +115,7 @@ function move(event){
 	arrOfObj.forEach(obj => {
 		slider.appendChild(createContainer(obj));		
 	});
-	
-	circlesList = createCirclesList();
-	carousel.appendChild(circlesList);
-
+	createCirclesList();
 	lighted = highLight(circlesList.children[1]);	
 }
 

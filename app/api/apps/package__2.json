@@ -1,0 +1,124 @@
+{
+	"tag":"div",
+	"class":"application__inner",
+	"children":[
+    	{
+	    	"tag":"div",
+	    	"class":"headline",
+	    	"html":"новый цфт-банк"
+	    	},
+    	{
+    		"tag":"hr",
+    		"class":"thread__line",
+    		"align":"center",
+    		"width":"690",
+    		"size":"1",
+    		"color":"#d8d8d8",
+    		"html":""
+    	},
+    	{
+    		"tag":"time",
+    		"class":"date section__date",
+    		"ms":1489195793649
+    	},
+	    {
+	    	"tag":"img",
+	    	"class":"application__img",
+	    	"guid":899,
+	    	"alt":"shot",
+	    	"html":""
+	    },
+   		{
+   			"tag":"div",
+   			"class":"application__block",   			
+   			"children":[
+      			{
+      				"tag":"div",
+      				"class":"text_style_app",
+      				"html":"Приложение лицензировано в 25 банках\nТип Приложения: Базовое\nРазработчик: ЦФТ\nКод по каталогу: 1B365001\n"
+	            },
+        		{
+        			"tag":"div",
+        			"class":"text_style_app application__position",              
+        			"children":[
+           				{
+           					"tag":"span",
+           					"class":"text_style_b",
+           					"html":"Требования:"
+           				},
+                  {
+                    "tag":"span",
+                    "class":"",
+                    "html":" совместимо с v.14.1, ТЯ v.7.4.0.0 и выше, при наличии лицензии на Проигрыватель форм в web"
+                  }
+          			]
+        		}
+      		]
+   		},
+    	{
+    		"tag":"div",
+    		"class":"application__button",
+    		"children":[
+        		{
+        			"tag":"a",
+        			"class":"button button__normal button_style_blue",
+        			"href":"../bin/step 1.html",
+        			"html":"в корзину"
+        		}
+      		]
+    	},
+    	{
+    		"tag":"div",
+    		"class":"headline",
+    		"html":"основные функции"
+    	},
+    	{
+    		"tag":"hr",
+    		"class":"thread__line",
+    		"align":"center",
+    		"width":"690",
+    		"size":"1",
+    		"color":"#d8d8d8",
+    		"html":""
+    	},
+    	{
+    		"tag":"ul",
+    		"class":"application__list list_style_catalog",
+    		"children":[
+        		{
+        			"tag":"li",
+        			"class":"list__item",
+        			"children":[
+          				{
+          					"tag":"div",
+          					"class":"text_style_paragraph",
+          					"html":"Выполнение операций по банковским продуктам, используемым клиентом, и оформление новых продуктов банка непосредственно из Единого окна"
+          				}
+	        		]
+        		},
+        		{
+        			"tag":"li",
+        			"class":"list__item",
+        			"children":[
+            			{
+            				"tag":"div",
+            				"class":"text_style_paragraph",
+            				"html":"Возможность определения одного банковского продукта для отображения в Едином окне как рекомендуемого (для формирования списка адресно рекомендуемых продуктов необходима лицензия на Приложение Управление целевым маркетингом)"
+            			}
+          			]
+        		},
+        		{
+        			"tag":"li",
+        			"class":"list__item",
+        			"children":[
+            			{
+            				"tag":"div",
+            				"class":"text_style_paragraph",
+            				"html":"Начисление баллов операционным сотрудникам за выполнение операций по банковским продуктам и отображение результатов в Едином окне (для использования гибкой настройки условий начисления баллов необходима лицензия на Приложение Игрофикация)"
+            			}
+          			]
+        		}
+      		]
+    	}
+    ]
+}

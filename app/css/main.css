@@ -45,7 +45,7 @@ html{
 /*----------------------------------------------------------------------------------------------*/
 .page-header{
 	margin: 0 auto;	
-	min-width: 1600px;
+	min-width: 1650px;
 	background-color: #ffffff;
 	position: relative;
 	z-index: 2;
@@ -54,7 +54,7 @@ html{
 
 .page-header__logo{
 	margin: 22px 0;
-	margin-left: 213px;	
+	margin-left: 190px;	
 	display: inline-block;	
 }
 
@@ -95,8 +95,8 @@ html{
 /*----------------------------------------------------------------------------------------------*/
 .page-wrapper{
 	background-color: #f1f1f1; /**/
-//	text-align: center;	
-	position: relative;
+	text-align: center;	
+	position: relative;	
 }
 
 .page-wrapper__block{	
@@ -168,8 +168,11 @@ html{
 	color: #c3c3c3;	
 }
 
-.main-block__line{
+.main-block__line{	
 	margin-top: 50px;
+	width: 1100px;
+	height: 1px;
+	background-color: #d8d8d8;
 }
 
 .main-block__carousel{
@@ -183,8 +186,8 @@ html{
 
 .main-block__slider{	
 	text-align: left;
-//	margin: 26px 50px 0;
-//	margin-right: 0;
+	margin: 26px 50px 0;
+	margin-right: 0;
 
 	white-space: nowrap;
 	width: 9999px;
@@ -281,6 +284,13 @@ html{
 
 .icon__expand{
 	float: right;
+}
+
+.icon__cart{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	cursor: pointer;
 }
 
 .icon{
@@ -388,7 +398,7 @@ html{
 	display: inline-block;
 	position: relative;		
 	left: 490px;
-	bottom: 60px;
+	bottom: 50px;
 }
 /*----------------------------------------------------------------------------------------------*/
 .table{
@@ -501,7 +511,13 @@ html{
 }
 
 .application__img{	
-	float: right;	
+	float: right;
+	width: 252px;
+	height: 198px;
+}
+
+.application__price{
+	float: right;
 }
 
 .button{
