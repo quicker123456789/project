@@ -790,6 +790,8 @@ html{
 .table__img{
 	float: left;
 	margin-right: 40px;
+	width: 116px;
+	height: 87px;
 }
 
 .table__position{

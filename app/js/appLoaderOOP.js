@@ -1,5 +1,5 @@
 import Catalog from './class_catalog.js';
-import Application from './class_application.js';
+//import Application from './class_application.js';
 
 window.onload = () => {
 	let mainCatalog = new Catalog(),		

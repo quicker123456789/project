@@ -1,5 +1,4 @@
 import Catalog from './class_catalog.js';
-import Bin from './class_bin.js';
 
 export default class Application{
 	constructor (){

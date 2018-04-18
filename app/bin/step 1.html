@@ -26,63 +26,8 @@
 						<th></th>
 						<th class="table__h headline_style_t">итог</th>
 						<th></th>
-					</tr>	
-					<tr class="table__r">
-						<td class="table__d">
-							<img class="table__img" src="../assets/images/shot-2-copy.png" alt="shot-2-copy">
-							<span class="text_style_td">Новый ЦФТ-Банк</span><br>
-							<div class="table__position">
-								<input type="checkbox" id="#1" class="checkbox">
-								<label for="#1" class="headline_style_t checkbox__label-square">установка и настройка</label>
-							</div>	
-						</td>
-						<td class="table__d">
-							<span class="text_style_price">$139,99</span>
-						</td>
-						<td class="">
-							<div class="rating page__position">
-								<span class="ball rating__sym-ball_left"></span>
-								<span class="vote">1</span>
-								<span class="ball rating__sym-ball_right"></span>
-							</div>
-						</td>
-						<td class="table__d">
-							<span class="text_style_price">$139,99</span>
-						</td>
-						<td class="table__d">
-							<svg class="icon icon__delete" width="16px" height="16px">
-							  <use xlink:href="#delete"></use>
-							</svg>
-						</td>
 					</tr>
-					<tr class="table__r">
-						<td class="table__d">
-							<img class="table__img" src="../assets/images/shot-2-copy.png" alt="shot-2-copy">
-							<span class="text_style_td">Новый ЦФТ-Банк</span><br>
-							<div class="table__position">
-								<input type="checkbox" id="#2" class="checkbox">
-								<label for="#2" class="headline_style_t checkbox__label-square">установка и настройка</label>
-							</div>	
-						</td>
-						<td class="table__d">
-							<span class="text_style_price">$139,99</span>
-						</td>
-						<td class="">
-							<div class="rating page__position">
-								<span class="ball rating__sym-ball_left"></span>
-								<span class="vote">1</span>
-								<span class="ball rating__sym-ball_right"></span>
-							</div>
-						</td>
-						<td class="table__d">
-							<span class="text_style_price">$139,99</span>
-						</td>
-						<td class="table__d">
-							<svg class="icon icon__delete" width="16px" height="16px">
-							  <use xlink:href="#delete"></use>
-							</svg>
-						</td>
-					</tr>
+					<!--tmpl here-->									
 				</table>
 			</div>
 			<div class="basic-block__summary-1">
@@ -93,6 +38,39 @@
 			</div>
 		</div>
 	</div>
+
+	<template class="tmpl-row">
+		<tr class="table__r">
+			<td class="table__d">
+				<img class="table__img" alt="shot-2-copy">
+				<span class="text_style_td"></span><br>
+				<div class="table__position">
+					<input type="checkbox" id="#1" class="checkbox">
+					<label for="#1" class="headline_style_t checkbox__label-square">установка и настройка</label>
+				</div>	
+			</td>
+			<td class="table__d">
+				<span class="text_style_price"></span>
+			</td>
+			<td class="">
+				<div class="rating page__position">
+					<span class="ball rating__sym-ball_left"></span>
+					<span class="vote">1</span>
+					<span class="ball rating__sym-ball_right"></span>
+				</div>
+			</td>
+			<td class="table__d">
+				<span class="text_style_price"></span>
+			</td>
+			<td class="table__d">
+				<svg class="icon icon__delete" width="16px" height="16px">
+				  <use xlink:href="#delete"></use>
+				</svg>
+			</td>
+		</tr>
+	</template>
+
+	<script type="module" src="../js/basketLoader.js"></script>
 </body>
 
 <!--svg-->
