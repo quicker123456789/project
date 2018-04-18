@@ -1,8 +1,9 @@
 import Catalog from './class_catalog.js';
+import * as basketLoader from './basketLoader.js';
 //import Application from './class_application.js';
 
 window.onload = () => {
-	let mainCatalog = new Catalog(passBasket()),		
+	let mainCatalog = new Catalog(basketLoader.passBasket()),		
 		xhr = new XMLHttpRequest();
 	xhr.open('GET', '../api/app_packages.json', true);
 	xhr.send();
