@@ -119,4 +119,6 @@ function move(event){
 	lighted = highLight(circlesList.children[1]);	
 }
 
-//window.onload = () => init(); /*addEventListener("load", init);// */
+window.onload = () => {
+//	document.querySelector('.counter').innerText = localStorage['counter'] || 0;
+};

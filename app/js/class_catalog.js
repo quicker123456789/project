@@ -2,11 +2,10 @@
 import Basket from './class_basket.js';
 
 export default class Catalog{
-	constructor(basket){
+	constructor(/*basket*/){
 		console.log("catalog created");		
-	//	this.app = new Application();
-		self = this;
-		this.basket = basket;//new Basket();		
+		this.goods = {};
+		localStorage.removeItem('counter');
 	}
 
 	catalogInit(array){
@@ -24,7 +23,7 @@ export default class Catalog{
 		});
 	}
 
-	static highLight(link){
+	highLight(link){
 		let lighted = document.querySelector(".a-link_style_active");	
 		if (lighted) lighted.classList.remove("a-link_style_active");	
 		link.classList.add("a-link_style_active");
@@ -37,7 +36,7 @@ export default class Catalog{
 		if(target.tagName !== "A") return;	
 		event.preventDefault();
 
-		Catalog.highLight(target);
+		this.highLight(target);
 
 		let xhrApp = new XMLHttpRequest();
 		xhrApp.open('GET', target.href, true);
@@ -45,14 +44,14 @@ export default class Catalog{
 		xhrApp.onload = () =>{
 			console.log(xhrApp.status);	
 			container.innerHTML = "";		
-			Catalog.blockInit(container, JSON.parse(xhrApp.responseText)); 
+			this.blockInit(container, JSON.parse(xhrApp.responseText)); 
 
-			document.querySelector(".button").onclick = Catalog.basketHandler;
+			document.querySelector(".button").onclick = this.add2basket.bind(this);
 		};		
 	}
 
-	static blockInit(parent, object){ 
-		self.objApp = object;
+	blockInit(parent, object){ 
+		this.objApp = object;
 		let tmpApp = document.querySelector(".tmpl-app"),
 			tmpAppItem = document.querySelector(".tmpl-app__list-elem"),
 			tmpAppInner, tmpAppItemInner,
@@ -91,12 +90,19 @@ export default class Catalog{
 		parent.appendChild(tmpAppInner);
 	}
 
-	static basketHandler(event){
+	add2basket(event){
 		event.preventDefault();
 	//	console.log(event.target.href);
-	
-		document.querySelector('.counter').innerText = ++self.basket.quantity;
-		self.basket.add2basket({"id": self.objApp.id});		
+		let cnt = +document.querySelector('.counter').innerText;
+		localStorage.setItem('counter', ++cnt);
+		document.querySelector('.counter').innerText = localStorage['counter'];
+		
+		this.goods[this.objApp.id] = this.goods[this.objApp.id] + 1 || 1;
+		console.log(this.goods);
+		localStorage.setItem('objIds', JSON.stringify(this.goods));
+		/*
+		document.querySelector('.counter').innerText = ++this.basket.quantity;
+		this.basket.add2basket({"id": this.objApp.id});		*/
 	}
 	
 }

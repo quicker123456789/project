@@ -1,37 +1,44 @@
 export default class Basket{
 	constructor(){
 		console.log("basket created");
-		this._quantity = 0;
-		this._goods = {};
+		this._quantity = +localStorage['counter'];		
+		this._goods = JSON.parse(localStorage['objIds']);
+		console.log(this._goods);
+		this.totalPrice = 0;	
 	}
+	/*
 	get quantity() {
         return this._quantity;
     }
     set quantity(count) {
         this._quantity = count; 
-    }
+    }*/
 
-    add2basket(objId) {
+    /*add2basket(objId) {
     	this._goods[objId.id] = this._goods[objId.id] + 1 || 1;    	
     	console.log(this._goods);
-    }
+    }*/
 
     goodLoad(){
-    	let xhr = new XMLHttpRequest(),
-    		container = document.querySelector(".table");
+    	let container = document.querySelector(".table tbody");
 
 		 for(let key in this._goods){
+		 	let xhr = new XMLHttpRequest();
 		 	xhr.open('GET', `../api/apps/package${key}.json`, true);
-			xhr.send();
+			xhr.send();				
 			xhr.onload = () =>{
-				Basket.goodInit(container, JSON.parse(xhr.responseText));
+				this.goodInit(container, JSON.parse(xhr.responseText));	
+				document.querySelector(".text_style_total").innerText = `$${Math.trunc(this.totalPrice)}`;
+				let cent = String(this.totalPrice).split('.')[1];
+				cent = cent.length == 1 ? `${cent}0` : cent;
+				document.querySelector(".text_style_cent").innerText = cent;
 			};
-		 }
+		 }		
     }
 
-    static goodInit(parent, jsonObj){
+    goodInit(parent, jsonObj){
     	let tmplRow = document.querySelector(".tmpl-row"),
-    		amount = this._goods[jsonObj.id];
+    		amount = this._goods[jsonObj.id],
     		tmplInner,
     		imgMap = {
 				123: "../assets/images/shot-1.png",
@@ -50,13 +57,15 @@ export default class Basket{
 				302: "../assets/images/2.jpg"
 			};
 		tmplInner = tmplRow.content.cloneNode(true);
-		tmplInner.querySelector('.text_style_td').innerText = jsonObj.title;		
-		ArrayFrom(tmplInner.querySelectorAll('.text_style_price')).forEach(elem => 
-			elem.innerText = `$${jsonObj.price * amount}`);
+		tmplInner.querySelector('.text_style_td').innerText = jsonObj.title;
+		Array.from(tmplInner.querySelectorAll('.text_style_price'))[0].innerText = jsonObj.price;
+		Array.from(tmplInner.querySelectorAll('.text_style_price'))[1].innerText = `$${jsonObj.price * amount}`;
 		tmplInner.querySelector(".vote").innerText = amount;
 		tmplInner.querySelector('.table__img').src = imgMap[jsonObj.guid];
 
-		parent.appendChild(tmplInner);
+		parent.appendChild(tmplInner);	
+
+		this.totalPrice += jsonObj.price * amount;
     }
 
 }

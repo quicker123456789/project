@@ -477,7 +477,9 @@ html{
 	color: #292929;
 }
 
-.text_style_cent{	
+.text_style_cent{
+	position: relative;
+	bottom: 10px;
 	font-size: 19px;
 	color: #9fa3a7;
 }
