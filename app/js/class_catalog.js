@@ -2,8 +2,8 @@ import Application from './class_application.js';
 
 export default class Catalog{
 	constructor(){
-		console.log("catalog constructor");
-		self = this;		
+		console.log("catalog created");		
+	//	this.app = new Application();
 	}
 	
 	catalogInit(array){
@@ -21,7 +21,7 @@ export default class Catalog{
 		});
 	}
 
-	highLight(link){
+	static highLight(link){
 		let lighted = document.querySelector(".a-link_style_active");	
 		if (lighted) lighted.classList.remove("a-link_style_active");	
 		link.classList.add("a-link_style_active");
@@ -29,12 +29,12 @@ export default class Catalog{
 
 	appLoad(event){
 		let container = document.querySelector(".page-wrapper__right-block"),
-			target = event.target,
-			app = new Application();
+			target = event.target;
+		//	app = new Application();
 		if(target.tagName !== "A") return;	
 		event.preventDefault();
 
-		self.highLight(target);
+		Catalog.highLight(target);
 
 		let xhrApp = new XMLHttpRequest();
 		xhrApp.open('GET', target.href, true);
@@ -42,14 +42,9 @@ export default class Catalog{
 		xhrApp.onload = () =>{
 			console.log(xhrApp.status);	
 			container.innerHTML = "";		
-			app.blockInit(container, JSON.parse(xhrApp.responseText)); 
+			Application.blockInit(container, JSON.parse(xhrApp.responseText)); 
 
-			document.querySelector(".button").onclick = (e) => {
-				e.preventDefault();
-				console.log(e.target.href);
-
-				
-			};
+			document.querySelector(".button").onclick = Application.binHandler;
 		};		
 	}
 	

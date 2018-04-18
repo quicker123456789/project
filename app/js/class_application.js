@@ -1,12 +1,12 @@
 import Catalog from './class_catalog.js';
+import Bin from './class_bin.js';
 
 export default class Application{
 	constructor (){
-		console.log("app constructor");		
-		
+		console.log("app created");			
 	}
 
-	blockInit(parent, object){ 
+	static blockInit(parent, object){ 
 		let tmpApp = document.querySelector(".tmpl-app"),
 			tmpAppItem = document.querySelector(".tmpl-app__list-elem"),
 			tmpAppInner, tmpAppItemInner,
@@ -33,7 +33,7 @@ export default class Application{
 		tmpAppInner.querySelector('.application__img').src = imgMap[object.guid];
 		tmpAppInner.querySelector('.text_style_app').innerText = object.description;
 		tmpAppInner.querySelector('.application__requirements').innerText = object.requirements;		
-		tmpAppInner.querySelector('.button').href = object.id;
+	//	tmpAppInner.querySelector('.button').href = object.id;
 
 		object.features.forEach(feature => {
 			tmpAppItemInner = tmpAppItem.content.cloneNode(true);
@@ -45,5 +45,12 @@ export default class Application{
 		parent.appendChild(tmpAppInner);
 	}
 
+	static binHandler(event){
+		event.preventDefault();
+		console.log(event.target.href);
+
+
+		//document.querySelector('.counter').innerText = bin.quantity++;
+	}
 	
 }

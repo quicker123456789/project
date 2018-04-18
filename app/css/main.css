@@ -288,13 +288,33 @@ html{
 
 .icon__cart{
 	position: absolute;
-	top: 20px;
-	left: 20px;
+	top: 0px;
+	left: 0px;
 	cursor: pointer;
 }
 
 .icon{
 	cursor: pointer;
+}
+
+.page-header__bin{
+	position: relative;
+	bottom: 80px;
+	left: 20px;
+}
+
+.counter{
+	position: absolute;
+	top: -10px;
+	left: 40px;
+	padding-top: 5px;
+	font-size: 20px;
+	color: #fff;
+	background-color: #1e8bc3;
+	border-radius: 50%;
+	width: 35px;
+	height: 35px;
+	text-align: center;
 }
 
 .thread__line{
