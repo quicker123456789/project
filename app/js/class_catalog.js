@@ -2,11 +2,11 @@
 import Basket from './class_basket.js';
 
 export default class Catalog{
-	constructor(){
+	constructor(basket){
 		console.log("catalog created");		
 	//	this.app = new Application();
 		self = this;
-		this.basket = new Basket();		
+		this.basket = basket;//new Basket();		
 	}
 
 	catalogInit(array){

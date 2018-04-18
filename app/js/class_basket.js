@@ -31,6 +31,7 @@ export default class Basket{
 
     static goodInit(parent, jsonObj){
     	let tmplRow = document.querySelector(".tmpl-row"),
+    		amount = this._goods[jsonObj.id];
     		tmplInner,
     		imgMap = {
 				123: "../assets/images/shot-1.png",
@@ -49,10 +50,10 @@ export default class Basket{
 				302: "../assets/images/2.jpg"
 			};
 		tmplInner = tmplRow.content.cloneNode(true);
-		tmplInner.querySelector('.text_style_td').innerText = jsonObj.title;
+		tmplInner.querySelector('.text_style_td').innerText = jsonObj.title;		
 		ArrayFrom(tmplInner.querySelectorAll('.text_style_price')).forEach(elem => 
-			elem.innerText = `$${jsonObj.price}`);
-				
+			elem.innerText = `$${jsonObj.price * amount}`);
+		tmplInner.querySelector(".vote").innerText = amount;
 		tmplInner.querySelector('.table__img').src = imgMap[jsonObj.guid];
 
 		parent.appendChild(tmplInner);
