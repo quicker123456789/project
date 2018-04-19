@@ -2,7 +2,7 @@
 import Basket from './class_basket.js';
 
 export default class Catalog{
-	constructor(/*basket*/){
+	constructor(){
 		console.log("catalog created");		
 		this.goods = {};
 		localStorage.removeItem('counter');
@@ -99,10 +99,7 @@ export default class Catalog{
 		
 		this.goods[this.objApp.id] = this.goods[this.objApp.id] + 1 || 1;
 		console.log(this.goods);
-		localStorage.setItem('objIds', JSON.stringify(this.goods));
-		/*
-		document.querySelector('.counter').innerText = ++this.basket.quantity;
-		this.basket.add2basket({"id": this.objApp.id});		*/
+		localStorage.setItem('objIds', JSON.stringify(this.goods));	
 	}
 	
 }

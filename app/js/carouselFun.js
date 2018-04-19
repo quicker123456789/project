@@ -2,55 +2,35 @@ const WIDTH = 360;
 let slider = document.querySelector(".main-block__slider"),			
 	circlesList = document.querySelector('.carousel__circles'),
 	position = 0,	
-	lighted,
-	xhr = new XMLHttpRequest();
+	lighted;
 
-xhr.open('GET', 'api/app_packages.json', true);
-xhr.send();
-xhr.onload = function() {	
-	init(JSON.parse(this.responseText));
-
-	document.querySelector(".arrow__left").onclick = move;
-	document.querySelector(".arrow__right").onclick = move;
-
-	circlesList.onclick = (event) => {
-		let target = event.target, 
-			num = target.dataset.ind;
-		if(target.tagName !== "LI") return;	
-
-		position = -WIDTH*(num-1);	
-	    slider.style.marginLeft = position + 'px';
-	    
-		lighted = highLight(target);
-	};
-};
-xhr.onerror = function(){
-	console.log(xhr.status);
-	console.log(xhr.statusText);
-};
+function lt(first, second, deflt, lite){	
+	(lite == first || lite == second)? highLight(second) : lite = highLight(deflt);
+	
+	return lite;
+}
 
 function move(event){ 
+	let first = circlesList.firstElementChild,
+		second = circlesList.children[1],
+		prev = circlesList.lastElementChild.previousElementSibling,
+		last = circlesList.lastElementChild;
+
 	if (event.currentTarget.classList.contains("arrow__right")){
 		position = Math.max(position - WIDTH, -WIDTH * (slider.children.length-3));
 
-		(lighted == circlesList.lastElementChild.previousElementSibling ||
-	  		lighted == circlesList.lastElementChild) ? 
-		highLight(circlesList.lastElementChild.previousElementSibling) :
-		lighted = highLight(lighted.nextElementSibling);
+		lighted = lt(last,prev,lighted.nextElementSibling, lighted);		
 
 	} else {
 		position = Math.min(position + WIDTH, 0);
 
-		(lighted == circlesList.children[1] || 
-			lighted == circlesList.firstElementChild) ?
-		highLight(circlesList.children[1]) :
-		lighted = highLight(lighted.previousElementSibling);
+		lighted = lt(first,second,lighted.previousElementSibling, lighted);		
 	}
 	
 	slider.style.marginLeft = position + 'px';
 }
 
-/*export*/ function createContainer(object) {
+function createContainer(parent, object) {
 	let container = document.createElement("div"),
 	img = document.createElement("img"),
 	headline = document.createElement("div"),
@@ -88,10 +68,10 @@ function move(event){
 	container.appendChild(headline);
 	container.appendChild(date);
 
-	return container;
+	parent.appendChild(container);
 }
 
-/*export*/ function createCirclesList(){
+function createCirclesList(){
 	Array.from(slider.children).forEach((child, i) =>{
 		let dot = document.createElement("li");
 		dot.className = "carousel__dot";
@@ -101,7 +81,7 @@ function move(event){
 	});	
 }
 
-/*export*/ function highLight(marker){
+function highLight(marker){
 	let marked = circlesList.querySelector(".carousel__dot_highlight");		
 	if (marked) marked.classList.remove("carousel__dot_highlight");	
 
@@ -111,14 +91,43 @@ function move(event){
 }
 
 
-/*export*/ function init(arrOfObj){
+function carouselInit(arrOfObj){
 	arrOfObj.forEach(obj => {
-		slider.appendChild(createContainer(obj));		
+		createContainer(slider, obj);
 	});
 	createCirclesList();
-	lighted = highLight(circlesList.children[1]);	
+	lighted = highLight(circlesList.children[1]);
+
+	document.querySelector(".arrow__left").onclick = move;
+	document.querySelector(".arrow__right").onclick = move;
+
+	circlesList.onclick = (event) => {
+		let target = event.target, 
+			num = target.dataset.ind;
+		if(target.tagName !== "LI") return;	
+
+		position = -WIDTH*(num-1);	
+	    slider.style.marginLeft = position + 'px';
+	    
+		lighted = highLight(target);
+	};
+
 }
 
 window.onload = () => {
-//	document.querySelector('.counter').innerText = localStorage['counter'] || 0;
+	let xhr = new XMLHttpRequest();
+	xhr.open('GET', 'api/app_packages.json', true);
+	xhr.send();
+	xhr.onload = function() {	
+		carouselInit(JSON.parse(this.responseText));
+	
+	};
+
+	/*
+	xhr.onerror = function(){
+		console.log(xhr.status);
+		console.log(xhr.statusText);
+	};
+	*/
+
 };

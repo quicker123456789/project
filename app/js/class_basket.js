@@ -6,18 +6,6 @@ export default class Basket{
 		console.log(this._goods);
 		this.totalPrice = 0;	
 	}
-	/*
-	get quantity() {
-        return this._quantity;
-    }
-    set quantity(count) {
-        this._quantity = count; 
-    }*/
-
-    /*add2basket(objId) {
-    	this._goods[objId.id] = this._goods[objId.id] + 1 || 1;    	
-    	console.log(this._goods);
-    }*/
 
     goodLoad(){
     	let container = document.querySelector(".table tbody");
