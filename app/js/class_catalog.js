@@ -4,7 +4,7 @@ import Basket from './class_basket.js';
 export default class Catalog{
 	constructor(){
 		console.log("catalog created");
-			
+
 		let ids = localStorage['objIds'];
 		this.goods = ids ? JSON.parse(ids) : {};
 
