@@ -3,8 +3,11 @@ import Basket from './class_basket.js';
 
 export default class Catalog{
 	constructor(){
-		console.log("catalog created");		
-		this.goods = {};
+		console.log("catalog created");
+	//	this.goods = JSON.parse(localStrage['objIds']) || {};
+		let ids = localStorage['objIds'];
+		this.goods = ids ? JSON.parse(ids) : {};
+
 		localStorage.removeItem('counter');
 	}
 

@@ -2,7 +2,10 @@ export default class Basket{
 	constructor(){
 		console.log("basket created");
 		this._quantity = +localStorage['counter'];		
-		this._goods = JSON.parse(localStorage['objIds']);
+	
+		let ids = localStorage['objIds'];
+		ids ? this._goods = JSON.parse(ids) : console.log("корзина пуста");
+
 		console.log(this._goods);
 		this.totalPrice = 0;	
 	}
