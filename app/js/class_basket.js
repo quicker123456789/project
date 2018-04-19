@@ -1,10 +1,10 @@
 export default class Basket{
 	constructor(){
 		console.log("basket created");
-		this._quantity = +localStorage['counter'];		
-	
+		this._quantity = +localStorage['counter'];
+
 		let ids = localStorage['objIds'];
-		ids ? this._goods = JSON.parse(ids) : console.log("корзина пуста");
+		this._goods = ids ? JSON.parse(ids) : {};
 
 		console.log(this._goods);
 		this.totalPrice = 0;	
@@ -13,8 +13,10 @@ export default class Basket{
     goodLoad(){
     	let container = document.querySelector(".table tbody");
 
-		 for(let key in this._goods){
-		 	let xhr = new XMLHttpRequest();
+    	if (!Object.keys(this._goods).length) this.noGoods();
+
+		for(let key in this._goods){
+			let xhr = new XMLHttpRequest();
 		 	xhr.open('GET', `../api/apps/package${key}.json`, true);
 			xhr.send();				
 			xhr.onload = () =>{
@@ -57,6 +59,14 @@ export default class Basket{
 		parent.appendChild(tmplInner);	
 
 		this.totalPrice += jsonObj.price * amount;
+    }
+
+    noGoods(){
+    	let orderButton = document.querySelector(".button_style_blue");
+		document.querySelector(".text_style_total").innerText = 0;    		
+		orderButton.onclick = ()=>{return false};
+		orderButton.classList.remove("button_style_blue");
+		orderButton.classList.add("button_style_white");
     }
 
 }

@@ -576,14 +576,14 @@ html{
 	border: solid 1px #e5e5e5;
 	color: #2c3239;
 }
-
+/*
 .button_style_white:hover{
 	background-color: #cccccc;
 }
 
 .button_style_white:active{
 	background-color: #aaaaaa;
-}
+}*/
 /*----------------------------------------------------------------------------------------------*/
 .wrapper-pop-up__header{
 	margin: 0 200px 50px;
