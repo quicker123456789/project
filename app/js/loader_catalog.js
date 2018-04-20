@@ -1,8 +1,8 @@
 import Catalog from './class_catalog.js';
 
-window.onload = () => {
-	document.querySelector('.counter').innerText = localStorage['counter'] || 0;
+document.querySelector('.counter').innerText = localStorage['counter'] || 0;
 
+window.onload = () => {
 	let mainCatalog = new Catalog(),
 		xhr = new XMLHttpRequest();
 	xhr.open('GET', '../api/app_packages.json', true);
