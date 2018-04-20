@@ -1,6 +1,3 @@
-//import Application from './class_application.js';
-import Basket from './class_basket.js';
-
 export default class Catalog{
 	constructor(){
 		console.log("catalog created");

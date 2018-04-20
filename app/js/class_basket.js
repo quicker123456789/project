@@ -47,8 +47,8 @@ export default class Basket{
 		tmplInner = tmplRow.content.cloneNode(true);
 		tmplInner.querySelector('.table__r').setAttribute("data-id", jsonObj.id);
 		tmplInner.querySelector('.text_style_td').innerText = jsonObj.title;
-		tmplInner.querySelectorAll('.text_style_price')[0].innerText = jsonObj.price;
-		tmplInner.querySelectorAll('.text_style_price')[1].innerText = `$${jsonObj.price * amount}`;
+		tmplInner.querySelectorAll('.text_style_price')[0].innerText = `$${jsonObj.price}`;
+		tmplInner.querySelectorAll('.text_style_price')[1].innerText = `$${(jsonObj.price * amount).toFixed(2)}`;
 		tmplInner.querySelector(".vote").innerText = amount;
 		tmplInner.querySelector('.table__img').src = imgMap[jsonObj.guid];
 
@@ -61,10 +61,13 @@ export default class Basket{
     	document.querySelector(".text_style_total").innerText = `$${Math.trunc(number)}`;
 		number = number.toFixed(2);
 
-		let cent = String(number).split('.')[1];
-		if (cent) cent = cent.length == 1 ? `${cent}0` : Math.floor(cent);
-		else cent = '00';
+		let cent = String(number).split('.')[1];		
 		document.querySelector(".text_style_cent").innerText = cent;
+    }
+
+    sumPriceInsert(money, parent){    	
+    	money = money.toFixed(2);
+    	parent.querySelectorAll('.text_style_price')[1].innerText = `$${money}`;
     }
 
     noGoods(){
@@ -74,19 +77,37 @@ export default class Basket{
 		orderButton.classList.add("button_style_white");		
     }
 
-    addProduct(){
-    	
+    productIncrease(parent, sign, sump, prodp, quantity){  
+    	parent.querySelector(".vote").innerText = quantity += sign;
+    	sump += sign*prodp;
+		this.totalPrice += sign*prodp;
+
+		this.sumPriceInsert(sump, parent);    		
+		this.totalPriceInsert(this.totalPrice);
     }
 
-    removeProduct(e){
-    	if(!e.target.classList.contains("icon__delete")) return;    	
-    	let row = e.target.closest('.table__r');
-    	row.parentNode.removeChild(row);
+    productHandler(event){
+    	let row = event.target.closest('.table__r'),
+    		productAmount = +row.querySelector(".vote").innerText,
+    		productPrice = +row.querySelectorAll('.text_style_price')[0].innerText.slice(1),
+    		sumPrice = +row.querySelectorAll('.text_style_price')[1].innerText.slice(1);
 
-    	delete this._goods[+row.dataset.id];
-    	let productPrice = +row.querySelectorAll('.text_style_price')[1].innerText.slice(1);    	
-    	this.totalPrice -= productPrice;    	
-    	this.totalPriceInsert(this.totalPrice);
+    	if(event.target.classList.contains("icon__delete")) {
+    		row.parentNode.removeChild(row);
+    		delete this._goods[+row.dataset.id];
+
+    		this.totalPrice -= sumPrice;
+    		this.totalPriceInsert(this.totalPrice);
+    	}
+
+    	if(event.target.classList.contains("rating__sym-ball_left")){
+    		if (productAmount == 1) return false;
+    		this.productIncrease(row, -1, sumPrice, productPrice, productAmount);			
+    	}
+
+    	if(event.target.classList.contains("rating__sym-ball_right")){  
+    		this.productIncrease(row, 1, sumPrice, productPrice, productAmount);    	
+    	}
 
     	if (!Object.keys(this._goods).length) this.noGoods();
     }

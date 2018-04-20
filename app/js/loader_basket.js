@@ -5,10 +5,9 @@ window.onload = () =>{
 //	console.log(oneBasket);
 	oneBasket.productLoad();
 
-	document.querySelector('.table').addEventListener("click", oneBasket.removeProduct.bind(oneBasket), true);
-	document.querySelector('.table').addEventListener("click", oneBasket.addProduct.bind(oneBasket), true);
+	document.querySelector('.table').addEventListener("click", oneBasket.productHandler.bind(oneBasket), true);
 	
-	
+	/*вставить при завершении покупки*/
 	localStorage.removeItem('counter');
 	localStorage.removeItem('objIds');
 }
