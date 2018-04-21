@@ -25,7 +25,7 @@ export default class Basket{
 
 	_responeHandler(response){
 		let container = document.querySelector(".table tbody");
-		this._productInit(container, JSON.parse(response));	
+		this._productInit(container, JSON.parse(response));			
 		this._totalPriceInsert(this.totalPrice);
 	}
 
@@ -36,7 +36,7 @@ export default class Basket{
 		 Object.keys(this._goods).forEach(key => arrayPromises.push(Ajax.get(`../api/apps/package${key}.json`)));
 
 		 Promise.all(arrayPromises)
-		 		.then(this._responeHandler.bind(this))
+		 		.then(responses => responses.forEach(this._responeHandler.bind(this)))
 				.catch(function(error) {
 				  	console.error("Failed!", error);
 				});
@@ -64,6 +64,8 @@ export default class Basket{
 			};
 		tmplInner = tmplRow.content.cloneNode(true);
 		tmplInner.querySelector('.table__r').setAttribute("data-id", jsonObj.id);
+		tmplInner.querySelector('[type="checkbox"]').id = jsonObj.id;
+		tmplInner.querySelector('label').setAttribute("for", jsonObj.id);
 		tmplInner.querySelector('.text_style_td').innerText = jsonObj.title;
 		tmplInner.querySelectorAll('.text_style_price')[0].innerText = `$${jsonObj.price}`;
 		tmplInner.querySelectorAll('.text_style_price')[1].innerText = `$${(jsonObj.price * amount).toFixed(2)}`;

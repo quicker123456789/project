@@ -7,7 +7,7 @@ export default class Ajax{
 		    xhr.open('GET', url);
 
 		    xhr.onload = function() {		      
-		      if (xhr.status == 200) resolve(xhr.response);
+		      if (xhr.status == 200) resolve(xhr.responseText);
 		      
 		      else reject(Error(xhr.statusText));
 		    };
