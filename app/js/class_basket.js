@@ -1,3 +1,5 @@
+import Ajax from './class_ajax.js';
+
 export default class Basket{
 	constructor(){
 		console.log("basket created");
@@ -8,7 +10,7 @@ export default class Basket{
 			this._goods = JSON.parse(localStorage['objIds']);
 			this._quantity = +localStorage['counter'];
 		}catch(e){
-			console.log("error");
+			console.log("basket is empty");
 		}
 
 		console.log(this._goods);
@@ -21,18 +23,23 @@ export default class Basket{
 		return this._quantity;
 	}
 
-    _productLoad(){
-    	let container = document.querySelector(".table tbody");
+	_responeHandler(response){
+		let container = document.querySelector(".table tbody");
+		this._productInit(container, JSON.parse(response));	
+		this._totalPriceInsert(this.totalPrice);
+	}
+
+    _productLoad(){    	
+    	let arrayPromises = [];
+
     	if (!Object.keys(this._goods).length) this._noGoods();
-		for(let key in this._goods){
-			let xhr = new XMLHttpRequest();
-		 	xhr.open('GET', `../api/apps/package${key}.json`, true);
-			xhr.send();				
-			xhr.onload = () =>{
-				this._productInit(container, JSON.parse(xhr.responseText));	
-				this._totalPriceInsert(this.totalPrice);
-			};
-		 }		
+		 Object.keys(this._goods).forEach(key => arrayPromises.push(Ajax.get(`../api/apps/package${key}.json`)));
+
+		 Promise.all(arrayPromises)
+		 		.then(this._responeHandler.bind(this))
+				.catch(function(error) {
+				  	console.error("Failed!", error);
+				});
     }
 
     _productInit(parent, jsonObj){

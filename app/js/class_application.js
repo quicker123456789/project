@@ -9,7 +9,7 @@ export default class Application{
 		try{
 			this.products = JSON.parse(localStorage['objIds']);			
 		}catch(e){
-			console.log("error");
+			console.log("basket is still empty");
 		}
 		this.cart = new Basket();
 		this._init(target);
