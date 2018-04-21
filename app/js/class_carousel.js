@@ -9,14 +9,14 @@ export default class Carousel{
 
 	carouselInit(arrOfObj){
 		arrOfObj.forEach(obj => {
-			this.createContainer(this.slider, obj);
+			this._createContainer(this.slider, obj);
 		});
 
-		this.createCirclesList();
-		this.lighted = this.highLight(this.circlesList.children[1]);
+		this._createCirclesList();
+		this.lighted = this._highLight(this.circlesList.children[1]);
 
-		document.querySelector(".arrow__left").onclick = this.move.bind(this);
-		document.querySelector(".arrow__right").onclick = this.move.bind(this);
+		document.querySelector(".arrow__left").onclick = this._move.bind(this);
+		document.querySelector(".arrow__right").onclick = this._move.bind(this);
 
 		this.circlesList.onclick = (event) => {
 			let target = event.target, 
@@ -26,11 +26,11 @@ export default class Carousel{
 			this.position = -this.WIDTH*(num-1);	
 		    this.slider.style.marginLeft = this.position + 'px';
 		    
-			this.lighted = this.highLight(target);
+			this.lighted = this._highLight(target);
 		};
 	}
 
-	highLight(marker){
+	_highLight(marker){
 		let marked = document.querySelector(".carousel__dot_highlight");		
 		if (marked) marked.classList.remove("carousel__dot_highlight");	
 		marker.classList.add("carousel__dot_highlight");
@@ -38,7 +38,7 @@ export default class Carousel{
 		return marker;
 	}
 
-	createCirclesList(){
+	_createCirclesList(){
 		Array.from(this.slider.children).forEach((child, i) =>{
 			let dot = document.createElement("li");
 			dot.className = "carousel__dot";
@@ -48,7 +48,7 @@ export default class Carousel{
 		});	
 	}
 
-	createContainer(parent, object) {
+	_createContainer(parent, object) {
 		let container = document.createElement("div"),
 		img = document.createElement("img"),
 		headline = document.createElement("div"),
@@ -89,13 +89,13 @@ export default class Carousel{
 		parent.appendChild(container);
 	}
 
-	lt(first, second, deflt, lite){	
-		(lite == first || lite == second)? this.highLight(second) : lite = this.highLight(deflt);
+	_lt(first, second, deflt, lite){	
+		(lite == first || lite == second)? this._highLight(second) : lite = this._highLight(deflt);
 		
 		return lite;
 	}
 
-	move(event){ 
+	_move(event){ 
 		let first = this.circlesList.firstElementChild,
 			second = this.circlesList.children[1],
 			prev = this.circlesList.lastElementChild.previousElementSibling,
@@ -104,12 +104,12 @@ export default class Carousel{
 		if (event.currentTarget.classList.contains("arrow__right")){
 			this.position = Math.max(this.position - this.WIDTH, -this.WIDTH * (this.slider.children.length-3));
 
-			this.lighted = this.lt(last, prev, this.lighted.nextElementSibling, this.lighted);		
+			this.lighted = this._lt(last, prev, this.lighted.nextElementSibling, this.lighted);		
 
 		} else {
 			this.position = Math.min(this.position + this.WIDTH, 0);
 
-			this.lighted = this.lt(first, second ,this.lighted.previousElementSibling, this.lighted);		
+			this.lighted = this._lt(first, second ,this.lighted.previousElementSibling, this.lighted);		
 		}
 		
 		this.slider.style.marginLeft = this.position + 'px';

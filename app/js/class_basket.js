@@ -1,30 +1,41 @@
 export default class Basket{
 	constructor(){
 		console.log("basket created");
-		this._quantity = +localStorage['counter'];
+		this._quantity = 0;
+		this._goods = {};
 
-		let ids = localStorage['objIds'];
-		this._goods = ids ? JSON.parse(ids) : {};
+		try{
+			this._goods = JSON.parse(localStorage['objIds']);
+			this._quantity = +localStorage['counter'];
+		}catch(e){
+			console.log("error");
+		}
 
 		console.log(this._goods);
 		this.totalPrice = 0;	
+
+	//	this._productLoad();
 	}
 
-    productLoad(){
+	get quantity(){
+		return this._quantity;
+	}
+
+    _productLoad(){
     	let container = document.querySelector(".table tbody");
-    	if (!Object.keys(this._goods).length) this.noGoods();
+    	if (!Object.keys(this._goods).length) this._noGoods();
 		for(let key in this._goods){
 			let xhr = new XMLHttpRequest();
 		 	xhr.open('GET', `../api/apps/package${key}.json`, true);
 			xhr.send();				
 			xhr.onload = () =>{
-				this.productInit(container, JSON.parse(xhr.responseText));	
-				this.totalPriceInsert(this.totalPrice);
+				this._productInit(container, JSON.parse(xhr.responseText));	
+				this._totalPriceInsert(this.totalPrice);
 			};
 		 }		
     }
 
-    productInit(parent, jsonObj){
+    _productInit(parent, jsonObj){
     	let tmplRow = document.querySelector(".tmpl-row"),
     		amount = this._goods[jsonObj.id],
     		tmplInner,
@@ -57,7 +68,7 @@ export default class Basket{
 		this.totalPrice += jsonObj.price * amount;
     }
 
-    totalPriceInsert(number){
+    _totalPriceInsert(number){
     	document.querySelector(".text_style_total").innerText = `$${Math.trunc(number)}`;
 		number = number.toFixed(2);
 
@@ -65,25 +76,40 @@ export default class Basket{
 		document.querySelector(".text_style_cent").innerText = cent;
     }
 
-    sumPriceInsert(money, parent){    	
+    _sumPriceInsert(money, parent){    	
     	money = money.toFixed(2);
     	parent.querySelectorAll('.text_style_price')[1].innerText = `$${money}`;
     }
 
-    noGoods(){
+    _noGoods(){
     	let orderButton = document.querySelector(".button");		
-		orderButton.onclick = ()=>{return false};
+		orderButton.onclick = () =>  false;
 		orderButton.classList.remove("button_style_blue");
 		orderButton.classList.add("button_style_white");		
     }
 
-    productIncrease(parent, sign, sump, prodp, quantity){  
+    _productIncrease(parent, sign, sump, prodp, quantity){  
     	parent.querySelector(".vote").innerText = quantity += sign;
     	sump += sign*prodp;
 		this.totalPrice += sign*prodp;
 
-		this.sumPriceInsert(sump, parent);    		
-		this.totalPriceInsert(this.totalPrice);
+		this._sumPriceInsert(sump, parent);    		
+		this._totalPriceInsert(this.totalPrice);
+    }
+
+    _deleteProduct(parent, sump){    	
+		parent.parentNode.removeChild(parent);
+		delete this._goods[+parent.dataset.id];
+
+		this.totalPrice -= sump;
+		this._totalPriceInsert(this.totalPrice);
+    }
+
+    add2cart(prod){
+    	this._goods = prod;
+		this._quantity++;
+    	localStorage.setItem('counter', this._quantity);
+    	localStorage.setItem('objIds', JSON.stringify(this._goods));
     }
 
     productHandler(event){
@@ -93,23 +119,19 @@ export default class Basket{
     		sumPrice = +row.querySelectorAll('.text_style_price')[1].innerText.slice(1);
 
     	if(event.target.classList.contains("icon__delete")) {
-    		row.parentNode.removeChild(row);
-    		delete this._goods[+row.dataset.id];
-
-    		this.totalPrice -= sumPrice;
-    		this.totalPriceInsert(this.totalPrice);
+    		this._deleteProduct(row, sumPrice);
     	}
 
     	if(event.target.classList.contains("rating__sym-ball_left")){
     		if (productAmount == 1) return false;
-    		this.productIncrease(row, -1, sumPrice, productPrice, productAmount);			
+    		this._productIncrease(row, -1, sumPrice, productPrice, productAmount);			
     	}
 
     	if(event.target.classList.contains("rating__sym-ball_right")){  
-    		this.productIncrease(row, 1, sumPrice, productPrice, productAmount);    	
+    		this._productIncrease(row, 1, sumPrice, productPrice, productAmount);    	
     	}
 
-    	if (!Object.keys(this._goods).length) this.noGoods();
-    }
+    	if (!Object.keys(this._goods).length) this._noGoods();
+    }   
 
 }
