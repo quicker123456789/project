@@ -4,13 +4,7 @@ import Ajax from './class_ajax.js';
 export default class Application{
 	constructor(target){
 		console.log("app created");
-
-		this.products = {};
-		try{
-			this.products = JSON.parse(localStorage['objIds']);			
-		}catch(e){
-			console.log("basket is still empty");
-		}
+		
 		this.cart = new Basket();
 		this._init(target);
 	}
@@ -59,8 +53,7 @@ export default class Application{
 		tmpAppInner.querySelector('.application__img').src = imgMap[object.guid];
 		tmpAppInner.querySelector('.text_style_app').innerText = object.description;
 		tmpAppInner.querySelector('.application__requirements').innerText = object.requirements;		
-	//	tmpAppInner.querySelector('.button').href = `#${object.id}`;
-
+	
 		object.features.forEach(feature => {
 			tmpAppItemInner = tmpAppItem.content.cloneNode(true);
 			tmpAppItemInner.querySelector('.text_style_paragraph').innerText = feature;
@@ -73,10 +66,9 @@ export default class Application{
 
 	_add2basketHandler(event){
 		event.preventDefault();
-		this.products[this.objApp.id] = this.products[this.objApp.id] + 1 || 1;
-		this.cart.add2cart(this.products);
 
+		this.cart.add2cart(this.objApp.id);
 		document.querySelector('.counter').innerText = this.cart.quantity;		
-		console.log(this.products);
+		console.log(this.cart._goods);
 	}
 } 

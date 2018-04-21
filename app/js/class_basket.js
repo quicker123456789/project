@@ -16,7 +16,7 @@ export default class Basket{
 		console.log(this._goods);
 		this.totalPrice = 0;	
 
-	//	this._productLoad();
+	//	this.productLoad();
 	}
 
 	get quantity(){
@@ -29,7 +29,7 @@ export default class Basket{
 		this._totalPriceInsert(this.totalPrice);
 	}
 
-    _productLoad(){    	
+    productLoad(){    	
     	let arrayPromises = [];
 
     	if (!Object.keys(this._goods).length) this._noGoods();
@@ -114,8 +114,8 @@ export default class Basket{
 		this._totalPriceInsert(this.totalPrice);
     }
 
-    add2cart(prod){
-    	this._goods = prod;
+    add2cart(prodId){ 	
+    	this._goods[prodId] = this._goods[prodId] + 1 || 1;
 		this._quantity++;
     	localStorage.setItem('counter', this._quantity);
     	localStorage.setItem('objIds', JSON.stringify(this._goods));
