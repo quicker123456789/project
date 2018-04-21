@@ -68,7 +68,7 @@ export default class Application{
 		event.preventDefault();
 
 		this.cart.add2cart(this.objApp.id);
-		document.querySelector('.counter').innerText = this.cart.quantity;		
+		document.querySelector('.counter').innerText = this.cart.quantity;
 		console.log(this.cart._goods);
 	}
 } 
