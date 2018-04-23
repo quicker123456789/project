@@ -6,4 +6,7 @@ window.onload = () =>{
 	oneBasket.productLoad();
 
 	document.querySelector('.table').addEventListener("click", oneBasket.productHandler.bind(oneBasket), true);
-}
+
+};
+
+

@@ -94,16 +94,20 @@ export default class Basket{
     	let orderButton = document.querySelector(".button");		
 		orderButton.onclick = () =>  false;
 		orderButton.classList.remove("button_style_blue");
-		orderButton.classList.add("button_style_white");		
+		orderButton.classList.add("button_style_disable");
     }
 
-    _productIncrease(parent, sign, sump, prodp, quantity){  
+    _productIncrease(parent, sign, sump, prodp, quantity){ 
     	parent.querySelector(".vote").innerText = quantity += sign;
     	sump += sign*prodp;
 		this.totalPrice += sign*prodp;
 
 		this._sumPriceInsert(sump, parent);    		
 		this._totalPriceInsert(this.totalPrice);
+
+		this._quantity += sign;
+		this._goods[+parent.dataset.id] += sign;
+		this._localStorageWriter({'counter': this._quantity, 'objIds': JSON.stringify(this._goods)});
     }
 
     _deleteProduct(parent, sump){    	
@@ -112,13 +116,23 @@ export default class Basket{
 
 		this.totalPrice -= sump;
 		this._totalPriceInsert(this.totalPrice);
+
+		let prodAmount = +parent.querySelector(".vote").innerText;
+		this._quantity -= prodAmount;
+
+		this._localStorageWriter({'counter': this._quantity, 'objIds': JSON.stringify(this._goods)});
     }
 
     add2cart(prodId){ 	
     	this._goods[prodId] = this._goods[prodId] + 1 || 1;
 		this._quantity++;
-    	localStorage.setItem('counter', this._quantity);
-    	localStorage.setItem('objIds', JSON.stringify(this._goods));
+
+		this._localStorageWriter({'counter': this._quantity, 'objIds': JSON.stringify(this._goods)});	
+    }
+
+    _localStorageWriter(properties){
+    	for (let field in properties)
+    		localStorage.setItem(field, properties[field]);    	
     }
 
     productHandler(event){
