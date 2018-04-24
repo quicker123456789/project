@@ -65,7 +65,7 @@ html{
 
 .page-header__links{
 	float: right;
-	margin: 43px 200px 40px 0;
+	margin: 43px 200px;
 }
 
 .header-list__item{
@@ -126,7 +126,7 @@ html{
 	top: 50px;
 	left: 610px;
 
-	width: 773px;
+	width: 793px;
 	min-height: 884px;
 }
 
@@ -661,6 +661,7 @@ html{
 }
 
 .progress-bar__level_status_done:before{
+	cursor: pointer;
 	content:"";
 	background: #1e8bc3 url(../assets/icons/path.svg) no-repeat 50% 50%;
 	background-size: 30%;

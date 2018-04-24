@@ -89,7 +89,7 @@ export default class Carousel{
 		parent.appendChild(container);
 	}
 
-	_lt(first, second, deflt, lite){	
+	_lighter(first, second, deflt, lite){	
 		(lite == first || lite == second)? this._highLight(second) : lite = this._highLight(deflt);
 		
 		return lite;
@@ -104,12 +104,12 @@ export default class Carousel{
 		if (event.currentTarget.classList.contains("arrow__right")){
 			this.position = Math.max(this.position - this.WIDTH, -this.WIDTH * (this.slider.children.length-3));
 
-			this.lighted = this._lt(last, prev, this.lighted.nextElementSibling, this.lighted);		
+			this.lighted = this._lighter(last, prev, this.lighted.nextElementSibling, this.lighted);		
 
 		} else {
 			this.position = Math.min(this.position + this.WIDTH, 0);
 
-			this.lighted = this._lt(first, second ,this.lighted.previousElementSibling, this.lighted);		
+			this.lighted = this._lighter(first, second ,this.lighted.previousElementSibling, this.lighted);		
 		}
 		
 		this.slider.style.marginLeft = this.position + 'px';
