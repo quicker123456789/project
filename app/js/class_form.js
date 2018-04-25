@@ -1,8 +1,7 @@
 export default class Form{
 	constructor(){
 		this._formData = {};
-		this._formInput = document.querySelectorAll('input[type="text"]');
-
+		this._formInput = document.querySelectorAll('input[type="text"]');	
 	}
 
 	readData(localStorageForm){
@@ -11,7 +10,7 @@ export default class Form{
 			this._formData = JSON.parse(localStorage[localStorageForm]);
 			this._fillForm();
 		}catch(e){
-			console.log("form is not filled");
+			console.log("form is not filled", e);
 		}
 	}
 
@@ -19,6 +18,10 @@ export default class Form{
 		Array.from(this._formInput).forEach(field => {
 			this._formData[field.className] = field.value;
 		});
+
+		let radioChkd = document.querySelector('input[name="setup"]:checked');
+		if (radioChkd) this._formData['radioChkd'] = radioChkd.id;
+
 		localStorage.setItem(this._localStorageForm, JSON.stringify(this._formData));
 	}
 
@@ -26,5 +29,7 @@ export default class Form{
 		Array.from(this._formInput).forEach(field => {
 			field.value = this._formData[field.className];
 		});
+
+		document.getElementById(`${this._formData['radioChkd']}`).checked = true;
 	}
 }

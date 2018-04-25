@@ -33,9 +33,9 @@ export default class Basket{
     	let arrayPromises = [];
 
     	if (!Object.keys(this._goods).length) this._noGoods();
-		 Object.keys(this._goods).forEach(key => arrayPromises.push(Ajax.get(`../api/apps/package${key}.json`)));
+		Object.keys(this._goods).forEach(key => arrayPromises.push(Ajax.get(`../api/apps/package${key}.json`)));
 
-		 Promise.all(arrayPromises)
+		Promise.all(arrayPromises)
 		 		.then(responses => responses.forEach(this._responeHandler.bind(this)))
 				.catch(function(error) {
 				  	console.error("Failed!", error);

@@ -18,4 +18,5 @@ window.onload = () =>{
 	document.querySelector('.progress-bar__list').onclick = progressbar.previousStep;
 
 	document.querySelector('.holder-form').onchange = () => form.saveData();
+	
 };
