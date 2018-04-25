@@ -3,12 +3,14 @@ import Ajax from './class_ajax.js';
 export default class Basket{
 	constructor(){
 		console.log("basket created");
+		this._checkSetup = [];
 		this._quantity = 0;
 		this._goods = {};
 
 		try{
 			this._goods = JSON.parse(localStorage['objIds']);
 			this._quantity = +localStorage['counter'];
+			this._checkSetup = localStorage['boxes'].split(',');
 		}catch(e){
 			console.log("basket is empty");
 		}
@@ -39,7 +41,7 @@ export default class Basket{
 		 		.then(responses => responses.forEach(this._responeHandler.bind(this)))
 				.catch(function(error) {
 				  	console.error("Failed!", error);
-				});
+				});		
     }
 
     _productInit(parent, jsonObj){
@@ -65,6 +67,7 @@ export default class Basket{
 		tmplInner = tmplRow.content.cloneNode(true);
 		tmplInner.querySelector('.table__r').setAttribute("data-id", jsonObj.id);
 		tmplInner.querySelector('[type="checkbox"]').id = jsonObj.id;
+		tmplInner.querySelector('[type="checkbox"]').checked = this._checkSetup[jsonObj.id] === "true";
 		tmplInner.querySelector('label').setAttribute("for", jsonObj.id);
 		tmplInner.querySelector('.text_style_td').innerText = jsonObj.title;
 		tmplInner.querySelectorAll('.text_style_price')[0].innerText = `$${jsonObj.price}`;
@@ -113,6 +116,7 @@ export default class Basket{
     _deleteProduct(parent, sump){    	
 		parent.parentNode.removeChild(parent);
 		delete this._goods[+parent.dataset.id];
+		this._checkSetup[+parent.dataset.id] = false;
 
 		this.totalPrice -= sump;
 		this._totalPriceInsert(this.totalPrice);
@@ -152,6 +156,12 @@ export default class Basket{
 
     	if(event.target.classList.contains("rating__sym-ball_right")){  
     		this._productIncrease(row, 1, sumPrice, productPrice, productAmount);    	
+    	}
+
+    	if(event.target.classList.contains("checkbox")){    		
+    		this._checkSetup[row.dataset.id] = row.querySelector(".checkbox").checked;
+    		
+    		localStorage.setItem('boxes', this._checkSetup.join(','));
     	}
 
     	if (!Object.keys(this._goods).length) this._noGoods();
