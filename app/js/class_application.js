@@ -49,7 +49,7 @@ export default class Application{
 		tmpAppInner = tmpApp.content.cloneNode(true);
 		tmpAppInner.querySelector('.headline__app').innerText = object.title;
 		tmpAppInner.querySelector('.price').innerText = object.price;
-		tmpAppInner.querySelector('.section__date').innerText = new Date(object.datetime).toLocaleDateString('ru-RU',{year: 'numeric', month: 'long', day: 'numeric' });
+		tmpAppInner.querySelector('.section__date').innerText = new Date(object.datetime).toLocaleDateString('ru-RU',{year: 'numeric', month: 'long', day: 'numeric'});
 		tmpAppInner.querySelector('.application__img').src = imgMap[object.guid];
 		tmpAppInner.querySelector('.text_style_app').innerText = object.description;
 		tmpAppInner.querySelector('.application__requirements').innerText = object.requirements;		

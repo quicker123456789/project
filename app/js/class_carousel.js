@@ -14,20 +14,17 @@ export default class Carousel{
 
 		this._createCirclesList();
 		this.lighted = this._highLight(this.circlesList.children[1]);
+	}
 
-		document.querySelector(".arrow__left").onclick = this._move.bind(this);
-		document.querySelector(".arrow__right").onclick = this._move.bind(this);
+	circlesHandler(e){
+		let target = event.target, 
+			num = target.dataset.ind;
+		if(target.tagName !== "LI") return;	
 
-		this.circlesList.onclick = (event) => {
-			let target = event.target, 
-				num = target.dataset.ind;
-			if(target.tagName !== "LI") return;	
-
-			this.position = -this.WIDTH*(num-1);	
-		    this.slider.style.marginLeft = this.position + 'px';
-		    
-			this.lighted = this._highLight(target);
-		};
+		this.position = -this.WIDTH*(num-1);	
+	    this.slider.style.marginLeft = this.position + 'px';
+	    
+		this.lighted = this._highLight(target);
 	}
 
 	_highLight(marker){
@@ -95,7 +92,7 @@ export default class Carousel{
 		return lite;
 	}
 
-	_move(event){ 
+	move(event){ 
 		let first = this.circlesList.firstElementChild,
 			second = this.circlesList.children[1],
 			prev = this.circlesList.lastElementChild.previousElementSibling,
