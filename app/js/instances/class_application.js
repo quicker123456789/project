@@ -1,5 +1,5 @@
 import Basket from './class_basket.js';
-import Ajax from './class_ajax.js';
+import Ajax from '../interfaces/class_ajax.js';
 
 export default class Application{
 	constructor(target){

@@ -1,4 +1,4 @@
-export default class Form{
+export default class IForm{
 	constructor(){
 		this._formData = {};
 		this._formInput = document.querySelectorAll('input[type="text"]');	

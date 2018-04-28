@@ -1,6 +1,6 @@
-import Catalog from './class_catalog.js';
-import Ajax from './class_ajax.js';
-import Basket from './class_basket.js';
+import Catalog from '../instances/class_catalog.js';
+import Ajax from '../interfaces/class_ajax.js';
+import Basket from '../instances/class_basket.js';
 
 document.querySelector('.counter').innerText = new Basket().quantity;//localStorage['counter'] || 0;
 

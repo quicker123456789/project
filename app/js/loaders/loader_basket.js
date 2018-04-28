@@ -1,4 +1,4 @@
-import Basket from './class_basket.js';
+import Basket from '../instances/class_basket.js';
 
 window.onload = () =>{
 	let oneBasket = new Basket();

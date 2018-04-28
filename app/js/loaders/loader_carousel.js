@@ -1,6 +1,6 @@
-import Carousel from './class_carousel.js';
-import Ajax from './class_ajax.js';
-import Basket from './class_basket.js';
+import Carousel from '../instances/class_carousel.js';
+import Ajax from '../interfaces/class_ajax.js';
+import Basket from '../instances/class_basket.js';
 
 document.querySelector('.counter').innerText = new Basket().quantity;//localStorage['counter'] || 0;
 
